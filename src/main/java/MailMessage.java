@@ -1,3 +1,5 @@
+import com.task.MailSendTasks;
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
@@ -8,19 +10,10 @@ import java.util.logging.Logger;
 
 public class MailMessage {
 
-    private Logger logger;
-    private Properties properties;
-    private Session session;
-
-    public MailMessage(String user, String password, Properties properties, Logger logger) {
-        this.logger = logger;
-        session = Session.getDefaultInstance(properties,
-                new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(user, password);
-                    }
-                });
+    private MailSession session;
+    private MailSendTasks tasks;
+    public MailMessage(boolean logOn) {
+        ConfigInit configInit = new ConfigInit(logOn);
     }
 
 

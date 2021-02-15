@@ -18,11 +18,11 @@ import java.util.logging.SimpleFormatter;
 public class ConfigInit implements Configuratble {
 
     private Logger logger;
-    private final Properties properties;
+    private Path connectConfig;
+    private Path senderConfig;
 
 
     public ConfigInit(boolean logOn) throws IOException {
-        properties = new Properties();
         if(logOn) {
             initLogger();
         }
@@ -32,23 +32,60 @@ public class ConfigInit implements Configuratble {
     private void init() throws IOException {
 
         logInfo("Prepare to read config file");
-        Path connectConfig = Paths.get("/configuration/connection_settings.json");
-        Path senderConfig = Paths.get("/configuration/sender_settings.json");
+        connectConfig = Paths.get("/configuration/connection_settings.json");
+        senderConfig = Paths.get("/configuration/sender_settings.json");
         if(!Files.exists(connectConfig)) {
             logInfo("Configuration file 'connection_settings.json' not found.. Create example file config");
-            createExampleConfigFile(connectConfig);
+            createExampleConfigFile();
         }
 
         if(!Files.exists(senderConfig)) {
             logInfo("Configuration file 'sender_settings.json' not found.. Create example file config");
-            createExampleSendConfig(senderConfig);
+            createExampleSendConfig();
         }
 
     }
 
-    private void readConfigFileJSON() {
+    public MailSession readConfigFileAndGetSession() {
+        logInfo("Start read file: 'connection_settings.json'... ");
+        ObjectMapper mapper = new ObjectMapper();
+        Properties properties = new Properties();
+        try {
+            ConnectionSettings settings =  mapper.readValue(connectConfig.toFile(), ConnectionSettings.class);
 
+            logInfo("readConfigFileAndGetSession: Complete read file: 'connection_settings.json'... ");
+            logInfo("readConfigFileAndGetSession: settings info: " + settings.toString());
+            properties.put("mail.smtp.host", settings.getSmtpHost());
+            properties.put("mail.smtp.auth", settings.getAuth());
+            properties.put("mail.smtp.port", settings.getPort());
+            properties.put("mail.smtp.socketFactory.port", settings.getSocketFactory());
+            properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+            logInfo("readConfigFileAndGetSession: Getting MailSession");
+            return new MailSession(properties, settings.getAccountFullName(), settings.getPassword());
+        } catch (IOException e) {
+            logWarning("readConfigFileAndGetSession: Exception", e);
+        }
+        return null;
     }
+
+    public MailSendTasks readConfigFileAndGetTask() {
+        logInfo("readConfigFileAndGetTask: Start read file 'sender_settings.json'...");
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            MailSendTasks mailSendTasks = mapper.readValue(senderConfig.toFile(), MailSendTasks.class);
+            logInfo("readConfigFileAndGetTask: Complete read file: 'connection_settings.json'... ");
+            logInfo("readConfigFileAndGetTask: settings info: " + mailSendTasks.toString());
+            return mailSendTasks;
+        } catch (IOException e) {
+            logWarning("readConfigFileAndGetTask: Exception", e);
+        }
+        return null;
+    }
+
+
+
 
     private void initLogger() {
         logger  = Logger.getLogger("MailMessage");
@@ -63,7 +100,7 @@ public class ConfigInit implements Configuratble {
         }
     }
 
-    private void createExampleConfigFile(Path connectConfig) throws IOException {
+    private void createExampleConfigFile() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         logInfo("Write config file: " + connectConfig.toString());
         objectMapper.writeValue(connectConfig.toFile(), new ConnectionSettings("smtp.example.ru",
@@ -74,7 +111,7 @@ public class ConfigInit implements Configuratble {
                 "password"));
     }
 
-    private void createExampleSendConfig(Path senderConfig) throws IOException {
+    private void createExampleSendConfig() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 //            (String fromEmail, List<String> sendListToEmail, List<String> attachedFilesInDirectory, String subject, String text)
 
@@ -116,9 +153,4 @@ public class ConfigInit implements Configuratble {
         }
     }
 
-
-    @Override
-    public Properties getProperties() {
-        return properties;
-    }
 }
