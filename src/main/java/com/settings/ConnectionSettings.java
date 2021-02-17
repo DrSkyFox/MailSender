@@ -1,3 +1,5 @@
+package com.settings;
+
 public class ConnectionSettings {
 
     private String smtpHost;
@@ -7,12 +9,6 @@ public class ConnectionSettings {
     private String accountFullName;
     private String password;
 
-    public ConnectionSettings(String smtpHost, String auth, String port, String socketFactory) {
-        this.smtpHost = smtpHost;
-        this.auth = auth;
-        this.port = port;
-        this.socketFactory = socketFactory;
-    }
 
     public ConnectionSettings(String smtpHost, String auth, String port, String socketFactory, String accountFullName, String password) {
         this.smtpHost = smtpHost;
@@ -21,6 +17,9 @@ public class ConnectionSettings {
         this.socketFactory = socketFactory;
         this.accountFullName = accountFullName;
         this.password = password;
+    }
+
+    public ConnectionSettings() {
     }
 
     public String getSmtpHost() {

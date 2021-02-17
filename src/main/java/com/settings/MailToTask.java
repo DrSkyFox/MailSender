@@ -1,4 +1,4 @@
-package com.task;
+package com.settings;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ public class MailToTask {
 
 
     private String fromEmail;
+
     private List<String> sendListToEmail;
     private List<String> attachedFilesInDirectory;
     private String subject;
@@ -21,6 +22,8 @@ public class MailToTask {
         this.text = text;
         this.taskEnabled = taskEnabled;
     }
+
+
 
     public String getFromEmail() {
         return fromEmail;
@@ -60,6 +63,14 @@ public class MailToTask {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Boolean getTaskEnabled() {
+        return taskEnabled;
+    }
+
+    public void setTaskEnabled(Boolean taskEnabled) {
+        this.taskEnabled = taskEnabled;
     }
 
     @Override

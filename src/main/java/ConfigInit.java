@@ -1,115 +1,130 @@
-
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.task.MailSendTasks;
-import com.task.MailToTask;
-import interfaces.Configuratble;
+import com.settings.ConnectionSettings;
+import com.settings.MailToTask;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+
 
 public class ConfigInit  {
 
-    private LogWriter logWriter;
-    private Path connectConfig;
-    private Path senderConfig;
+    private static final Logger logger = LogManager.getLogger(ConfigInit.class.getName());
+
+
+    private Path connectionConfig;
+    private Path taskConfig;
     private Boolean fileExists;
 
 
-    public ConfigInit(LogWriter logWriter) throws IOException {
-        this.logWriter = logWriter;
+    public ConfigInit(Path connectionConfig, Path taskConfig) {
+        this.connectionConfig = connectionConfig;
+        this.taskConfig = taskConfig;
         init();
     }
 
-    private void init() throws IOException {
+    private void init()  {
+        fileExists = true;
+        logger.info("Prepare to read config file: connection_settings.json, sender_settings.json");
 
-        logWriter.logInfo("Prepare to read config file");
-        connectConfig = Paths.get("/configuration/connection_settings.json");
-        senderConfig = Paths.get("/configuration/sender_settings.json");
-        if(!Files.exists(connectConfig)) {
-            logWriter.logInfo("Configuration file 'connection_settings.json' not found.. Create example file config");
+        connectionConfig = Paths.get("connection_settings.json");
+        taskConfig = Paths.get("sender_settings.json");
+
+
+        if(!Files.exists(connectionConfig)) {
+            logger.info("Configuration file 'connection_settings.json' not found.. Create example file config");
             createExampleConfigFile();
             fileExists = false;
         }
-        if(!Files.exists(senderConfig)) {
-            logWriter.logInfo("Configuration file 'sender_settings.json' not found.. Create example file config");
+        if(!Files.exists(taskConfig)) {
+            logger.info("Configuration file 'sender_settings.json' not found.. Create example file config");
             createExampleSendConfig();
             fileExists = false;
         }
-        fileExists = true;
+        if(!fileExists) {
+            return;
+        }
+
     }
 
-    public Boolean getFileExists() {
-        return fileExists;
-    }
 
     public MailSession readConfigFileAndGetSession() {
-        logWriter.logInfo("Start read file: 'connection_settings.json'... ");
+        logger.info("Getting Session's parametrs");
+        logger.info(String.format("Start read configuration file: %s", connectionConfig.toString()));
         ObjectMapper mapper = new ObjectMapper();
         Properties properties = new Properties();
         try {
-            ConnectionSettings settings =  mapper.readValue(connectConfig.toFile(), ConnectionSettings.class);
+            ConnectionSettings settings =  mapper.readValue(connectionConfig.toFile(), ConnectionSettings.class);
 
-            logWriter.logInfo("readConfigFileAndGetSession: Complete read file: 'connection_settings.json'... ");
-            logWriter.logInfo("readConfigFileAndGetSession: settings info: " + settings.toString());
+            logger.info(String.format("Read file %s successful. Configuration is { %s }", connectionConfig.toString(), settings.toString()));
+
             properties.put("mail.smtp.host", settings.getSmtpHost());
             properties.put("mail.smtp.auth", settings.getAuth());
             properties.put("mail.smtp.port", settings.getPort());
             properties.put("mail.smtp.socketFactory.port", settings.getSocketFactory());
             properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-            logWriter.logInfo("readConfigFileAndGetSession: Getting MailSession");
             return new MailSession(properties, settings.getAccountFullName(), settings.getPassword());
         } catch (IOException e) {
-            logWriter.logWarning("readConfigFileAndGetSession: Exception", e);
+            logger.warn(String.format("Error in reading configuration file: %s ", connectionConfig.toString()), e);
         }
         return null;
     }
 
-    public MailSendTasks readConfigFileAndGetTask() {
-        logWriter.logInfo("readConfigFileAndGetTask: Start read file 'sender_settings.json'...");
+    public List<MailToTask> readConfigFileAndGetTask() {
+        logger.info("Getting task's parameters");
+        logger.info(String.format("Start read configuration file: %s", taskConfig.toString()));
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            MailSendTasks mailSendTasks = mapper.readValue(senderConfig.toFile(), MailSendTasks.class);
-            logWriter.logInfo("readConfigFileAndGetTask: Complete read file: 'connection_settings.json'... ");
-            logWriter.logInfo("readConfigFileAndGetTask: settings info: " + mailSendTasks.toString());
+            List<MailToTask> mailSendTasks = mapper.readValue(taskConfig.toFile(), new TypeReference<List<MailToTask>>() {});
+            logger.info(String.format("Read file %s successful. Configuration is { %s }", taskConfig.toString(), mailSendTasks.toString()));
             return mailSendTasks;
         } catch (IOException e) {
-            logWriter.logWarning("readConfigFileAndGetTask: Exception", e);
+            logger.warn(String.format("Error in reading configuration file: %s ", taskConfig.toString()), e);
         }
         return null;
     }
 
 
-    private void createExampleConfigFile() throws IOException {
+    private void createExampleConfigFile(){
+        logger.info("Creating example configuration file: connection_settings.json");
         ObjectMapper objectMapper = new ObjectMapper();
-        logWriter.logInfo("Write config file: " + connectConfig.toString());
-        objectMapper.writeValue(connectConfig.toFile(), new ConnectionSettings("smtp.example.ru",
+
+        ConnectionSettings settings = new ConnectionSettings(
+                "smtp.example.ru",
                 "true",
                 "465",
                 "465",
                 "login",
-                "password"));
+                "password");
+        logger.info(String.format("Writing data: { %s } to file: %s", settings, connectionConfig.toString()));
+
+        try {
+            objectMapper.writeValue(connectionConfig.toFile(), settings);
+        } catch (IOException e) {
+            logger.warn( String.format("Cant write data to file: %s ", connectionConfig.toString()), e);
+        }
     }
 
-    private void createExampleSendConfig() throws IOException {
+    private void createExampleSendConfig() {
+        logger.info(String.format("Creating example configuration file: %s", taskConfig.toString()));
         ObjectMapper objectMapper = new ObjectMapper();
-//            (String fromEmail, List<String> sendListToEmail, List<String> attachedFilesInDirectory, String subject, String text)
 
         List<String> stringList = new ArrayList<>();
         stringList.add("sendToEmail1@targetmail.com");
         stringList.add("sendToEmail2@targetmail.com");
+
         List<String> stringList1 = new ArrayList<>();
         stringList1.add("test");
-        stringList1.add("d:\\test");
+        stringList1.add("d:\test");
+
         List<MailToTask> mailToTaskList = new ArrayList<>();
         mailToTaskList.add(new MailToTask(
                 "emailFrom@mymail.com",
@@ -124,8 +139,12 @@ public class ConfigInit  {
                 "Subject Of Email",
                 "SomeText",false));
 
-        logWriter.logInfo("Write config file: " + senderConfig.toString());
-        objectMapper.writeValue(senderConfig.toFile(), new MailSendTasks(mailToTaskList));
+        logger.info(String.format("Writing data: { %s } to file %s", mailToTaskList.toString(), taskConfig.toString()));
+        try {
+            objectMapper.writeValue(taskConfig.toFile(), mailToTaskList);
+        } catch (IOException e) {
+            logger.warn( String.format("Cant write data to file: %s", taskConfig.toString()), e);
+        }
     }
 
 

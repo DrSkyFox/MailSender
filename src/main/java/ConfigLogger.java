@@ -4,11 +4,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class LogWriter {
+public class ConfigLogger {
 
     private static final  Logger logger = Logger.getLogger("MailMessage");
 
-    public LogWriter() {
+    public ConfigLogger() {
         initLogger();
     }
 
@@ -24,17 +24,6 @@ public class LogWriter {
         }
     }
 
-    public void logInfo(String msg) {
-        if(logger != null) {
-            logger.info(String.format("Class: %s, message: %s", this.getClass().getName(), msg));
-        }
-    }
-
-    public void logWarning(String msg, Exception e) {
-        if(logger != null) {
-            logger.warning(String.format("Class: %s, message: %s , exception: %s", this.getClass().getName(), msg, e.getMessage()));
-        }
-    }
 
 
 }
