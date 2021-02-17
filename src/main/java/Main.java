@@ -18,7 +18,7 @@ public class Main {
         Iterator<String> params = Arrays.stream(args).iterator();
         ConfigInit configInit;
         try {
-            configInit = new ConfigInit();
+            configInit = new ConfigInit(logWriter);
         } catch (IOException e) {
             logWriter.logWarning("Cant init configuration", e);
             return;
@@ -27,6 +27,7 @@ public class Main {
         MailMessage message = new MailMessage(configInit, logWriter);
         logWriter.logInfo("Start Do Tasks");
         message.doAllTask();
+
 
     }
 }

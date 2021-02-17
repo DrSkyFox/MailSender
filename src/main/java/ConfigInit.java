@@ -30,16 +30,16 @@ public class ConfigInit  {
 
     private void init() throws IOException {
 
-        logInfo("Prepare to read config file");
+        logWriter.logInfo("Prepare to read config file");
         connectConfig = Paths.get("/configuration/connection_settings.json");
         senderConfig = Paths.get("/configuration/sender_settings.json");
         if(!Files.exists(connectConfig)) {
-            logInfo("Configuration file 'connection_settings.json' not found.. Create example file config");
+            logWriter.logInfo("Configuration file 'connection_settings.json' not found.. Create example file config");
             createExampleConfigFile();
             fileExists = false;
         }
         if(!Files.exists(senderConfig)) {
-            logInfo("Configuration file 'sender_settings.json' not found.. Create example file config");
+            logWriter.logInfo("Configuration file 'sender_settings.json' not found.. Create example file config");
             createExampleSendConfig();
             fileExists = false;
         }
@@ -51,51 +51,47 @@ public class ConfigInit  {
     }
 
     public MailSession readConfigFileAndGetSession() {
-        logInfo("Start read file: 'connection_settings.json'... ");
+        logWriter.logInfo("Start read file: 'connection_settings.json'... ");
         ObjectMapper mapper = new ObjectMapper();
         Properties properties = new Properties();
         try {
             ConnectionSettings settings =  mapper.readValue(connectConfig.toFile(), ConnectionSettings.class);
 
-            logInfo("readConfigFileAndGetSession: Complete read file: 'connection_settings.json'... ");
-            logInfo("readConfigFileAndGetSession: settings info: " + settings.toString());
+            logWriter.logInfo("readConfigFileAndGetSession: Complete read file: 'connection_settings.json'... ");
+            logWriter.logInfo("readConfigFileAndGetSession: settings info: " + settings.toString());
             properties.put("mail.smtp.host", settings.getSmtpHost());
             properties.put("mail.smtp.auth", settings.getAuth());
             properties.put("mail.smtp.port", settings.getPort());
             properties.put("mail.smtp.socketFactory.port", settings.getSocketFactory());
             properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-            logInfo("readConfigFileAndGetSession: Getting MailSession");
+            logWriter.logInfo("readConfigFileAndGetSession: Getting MailSession");
             return new MailSession(properties, settings.getAccountFullName(), settings.getPassword());
         } catch (IOException e) {
-            logWarning("readConfigFileAndGetSession: Exception", e);
+            logWriter.logWarning("readConfigFileAndGetSession: Exception", e);
         }
         return null;
     }
 
     public MailSendTasks readConfigFileAndGetTask() {
-        logInfo("readConfigFileAndGetTask: Start read file 'sender_settings.json'...");
+        logWriter.logInfo("readConfigFileAndGetTask: Start read file 'sender_settings.json'...");
         ObjectMapper mapper = new ObjectMapper();
 
         try {
             MailSendTasks mailSendTasks = mapper.readValue(senderConfig.toFile(), MailSendTasks.class);
-            logInfo("readConfigFileAndGetTask: Complete read file: 'connection_settings.json'... ");
-            logInfo("readConfigFileAndGetTask: settings info: " + mailSendTasks.toString());
+            logWriter.logInfo("readConfigFileAndGetTask: Complete read file: 'connection_settings.json'... ");
+            logWriter.logInfo("readConfigFileAndGetTask: settings info: " + mailSendTasks.toString());
             return mailSendTasks;
         } catch (IOException e) {
-            logWarning("readConfigFileAndGetTask: Exception", e);
+            logWriter.logWarning("readConfigFileAndGetTask: Exception", e);
         }
         return null;
     }
 
 
-
-
-
-
     private void createExampleConfigFile() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        logInfo("Write config file: " + connectConfig.toString());
+        logWriter.logInfo("Write config file: " + connectConfig.toString());
         objectMapper.writeValue(connectConfig.toFile(), new ConnectionSettings("smtp.example.ru",
                 "true",
                 "465",
@@ -128,7 +124,7 @@ public class ConfigInit  {
                 "Subject Of Email",
                 "SomeText",false));
 
-        logInfo("Write config file: " + senderConfig.toString());
+        logWriter.logInfo("Write config file: " + senderConfig.toString());
         objectMapper.writeValue(senderConfig.toFile(), new MailSendTasks(mailToTaskList));
     }
 
