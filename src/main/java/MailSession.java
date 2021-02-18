@@ -1,12 +1,14 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import java.util.Objects;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 public class MailSession {
 
-    private static final Logger logger = Logger.getLogger(MailSession.class.getName());
+    private static final Logger logger = LogManager.getLogger(MailSession.class.getName());
 
     private Session session;
     private Properties properties;
