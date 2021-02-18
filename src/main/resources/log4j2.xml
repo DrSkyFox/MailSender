@@ -1,44 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
-
-    <!-- Logging Properties -->
-    <Properties>
-        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
-        <Property name="APP_LOG_ROOT">/logs/</Property>
-    </Properties>
+<Configuration status="WARN">
 
     <Appenders>
-
-        <!-- Console Appender -->
-        <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
         </Console>
 
-        <!-- File Appenders on need basis -->
-        <RollingFile name="FileLog" fileName="${APP_LOG_ROOT}/mail.log"
-                     filePattern="${APP_LOG_ROOT}/mail-%d{yyyy-MM-dd}-%i.log">
-            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+        <RollingFile name="RollingFile" filename="log/mail.log"
+                     filepattern="${logPath}/%d{YYYYMMddHHmmss}.log">
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
             <Policies>
-                <SizeBasedTriggeringPolicy size="19500KB" />
+                <SizeBasedTriggeringPolicy size="100 MB" />
             </Policies>
-            <DefaultRolloverStrategy max="10"/>
+            <DefaultRolloverStrategy max="20" />
         </RollingFile>
 
-
     </Appenders>
-
     <Loggers>
-
-        <Logger name="com.mailsender" additivity="false" level="debug">
-            <AppenderRef ref="FileLog" />
-            <AppenderRef ref="Console"  />
-        </Logger>
-
-        <Root level="warn">
-            <AppenderRef ref="Console"/>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFile" />
         </Root>
-
     </Loggers>
-
 </Configuration>
