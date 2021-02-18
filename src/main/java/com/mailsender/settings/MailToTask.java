@@ -23,7 +23,8 @@ public class MailToTask {
         this.taskEnabled = taskEnabled;
     }
 
-
+    public MailToTask() {
+    }
 
     public String getFromEmail() {
         return fromEmail;
