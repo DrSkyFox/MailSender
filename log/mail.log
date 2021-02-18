@@ -1,0 +1,443 @@
+2021-02-19 01:28:54 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-19 01:28:54 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-19 01:28:54 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-19 01:28:54 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@be68757 }
+2021-02-19 01:28:54 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-19 01:28:54 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-19 01:28:54 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-19 01:28:54 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-19 01:28:54 [main] INFO  MailMessage:31 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-19 01:28:54 [main] INFO  MailSession:29 - Getting session
+2021-02-19 01:28:54 [main] INFO  MailSession:38 - Creating session and return
+2021-02-19 01:28:54 [main] INFO  MailMessage:39 - Session got
+2021-02-19 01:28:54 [main] INFO  MailMessage:41 - Settings from Email :emailFrom@mymail.com
+2021-02-19 01:28:54 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 01:28:54 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 01:28:54 [main] INFO  MailMessage:62 - Settings Subject of Mail
+2021-02-19 01:28:54 [main] INFO  MailMessage:93 - Set message body: SomeText
+2021-02-19 01:28:54 [main] INFO  MailMessage:72 - Attaching files to Mail
+2021-02-19 01:28:54 [main] INFO  MailMessage:107 - Attaching file: test
+2021-02-19 01:28:54 [main] INFO  MailMessage:113 - Setting filename: test
+2021-02-19 01:28:54 [main] INFO  MailMessage:107 - Attaching file: d:	est
+2021-02-19 01:28:54 [main] INFO  MailMessage:113 - Setting filename: d:	est
+2021-02-19 01:28:54 [main] INFO  MailMessage:85 - SendingMessage
+2021-02-19 01:28:57 [main] ERROR MailMessage:88 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:86) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:32) [classes/:?]
+	at com.mailsender.Main.main(Main.java:45) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-19 01:28:57 [main] INFO  MailMessage:31 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-19 01:28:57 [main] INFO  MailSession:29 - Getting session
+2021-02-19 01:28:57 [main] INFO  MailSession:41 - return created session
+2021-02-19 01:28:57 [main] INFO  MailMessage:39 - Session got
+2021-02-19 01:28:57 [main] INFO  MailMessage:41 - Settings from Email :emailFrom@mymail.com
+2021-02-19 01:28:57 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 01:28:57 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 01:28:57 [main] INFO  MailMessage:62 - Settings Subject of Mail
+2021-02-19 01:28:57 [main] INFO  MailMessage:93 - Set message body: SomeText
+2021-02-19 01:28:57 [main] INFO  MailMessage:72 - Attaching files to Mail
+2021-02-19 01:28:57 [main] INFO  MailMessage:107 - Attaching file: test
+2021-02-19 01:28:57 [main] INFO  MailMessage:113 - Setting filename: test
+2021-02-19 01:28:57 [main] INFO  MailMessage:107 - Attaching file: d:	est
+2021-02-19 01:28:57 [main] INFO  MailMessage:113 - Setting filename: d:	est
+2021-02-19 01:28:57 [main] INFO  MailMessage:85 - SendingMessage
+2021-02-19 01:28:57 [main] ERROR MailMessage:88 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:86) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:32) [classes/:?]
+	at com.mailsender.Main.main(Main.java:45) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-19 01:40:10 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-19 01:40:10 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-19 01:40:10 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-19 01:40:10 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@48793bef }
+2021-02-19 01:40:10 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-19 01:40:10 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-19 01:40:10 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-19 01:40:10 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-19 01:40:10 [main] INFO  MailMessage:31 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-19 01:40:10 [main] INFO  MailSession:29 - Getting session
+2021-02-19 01:40:10 [main] INFO  MailSession:38 - Creating session and return
+2021-02-19 01:40:10 [main] INFO  MailMessage:39 - Session got
+2021-02-19 01:40:10 [main] INFO  MailMessage:41 - Settings from Email :emailFrom@mymail.com
+2021-02-19 01:40:10 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 01:40:10 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 01:40:10 [main] INFO  MailMessage:62 - Settings Subject of Mail
+2021-02-19 01:40:10 [main] INFO  MailMessage:93 - Set message body: SomeText
+2021-02-19 01:40:10 [main] INFO  MailMessage:72 - Attaching files to Mail
+2021-02-19 01:40:10 [main] INFO  MailMessage:107 - Attaching file: test
+2021-02-19 01:40:10 [main] INFO  MailMessage:113 - Setting filename: test
+2021-02-19 01:40:10 [main] INFO  MailMessage:107 - Attaching file: d:	est
+2021-02-19 01:40:10 [main] INFO  MailMessage:113 - Setting filename: d:	est
+2021-02-19 01:40:10 [main] INFO  MailMessage:85 - SendingMessage
+2021-02-19 01:40:15 [main] ERROR MailMessage:88 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:317) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:176) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:125) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send0(Transport.java:253) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send(Transport.java:124) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:86) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:32) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.Main.main(Main.java:45) [MailSender-0.1-jar-with-dependencies.jar:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	... 9 more
+2021-02-19 01:40:15 [main] INFO  MailMessage:31 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-19 01:40:15 [main] INFO  MailSession:29 - Getting session
+2021-02-19 01:40:15 [main] INFO  MailSession:41 - return created session
+2021-02-19 01:40:15 [main] INFO  MailMessage:39 - Session got
+2021-02-19 01:40:15 [main] INFO  MailMessage:41 - Settings from Email :emailFrom@mymail.com
+2021-02-19 01:40:15 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 01:40:15 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 01:40:15 [main] INFO  MailMessage:62 - Settings Subject of Mail
+2021-02-19 01:40:15 [main] INFO  MailMessage:93 - Set message body: SomeText
+2021-02-19 01:40:15 [main] INFO  MailMessage:72 - Attaching files to Mail
+2021-02-19 01:40:15 [main] INFO  MailMessage:107 - Attaching file: test
+2021-02-19 01:40:15 [main] INFO  MailMessage:113 - Setting filename: test
+2021-02-19 01:40:15 [main] INFO  MailMessage:107 - Attaching file: d:	est
+2021-02-19 01:40:15 [main] INFO  MailMessage:113 - Setting filename: d:	est
+2021-02-19 01:40:15 [main] INFO  MailMessage:85 - SendingMessage
+2021-02-19 01:40:15 [main] ERROR MailMessage:88 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:317) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:176) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:125) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send0(Transport.java:253) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send(Transport.java:124) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:86) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:32) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.Main.main(Main.java:45) [MailSender-0.1-jar-with-dependencies.jar:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	... 9 more
+2021-02-19 02:20:58 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-19 02:20:58 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-19 02:20:58 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-19 02:20:58 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@48793bef }
+2021-02-19 02:20:58 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-19 02:20:58 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-19 02:20:58 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-19 02:20:58 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-19 02:20:58 [main] INFO  MailMessage:31 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-19 02:20:58 [main] INFO  MailSession:29 - Getting session
+2021-02-19 02:20:58 [main] INFO  MailSession:38 - Creating session and return
+2021-02-19 02:20:58 [main] INFO  MailMessage:39 - Session got
+2021-02-19 02:20:58 [main] INFO  MailMessage:41 - Settings from Email :emailFrom@mymail.com
+2021-02-19 02:20:58 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 02:20:58 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 02:20:58 [main] INFO  MailMessage:62 - Settings Subject of Mail
+2021-02-19 02:20:58 [main] INFO  MailMessage:93 - Set message body: SomeText
+2021-02-19 02:20:58 [main] INFO  MailMessage:72 - Attaching files to Mail
+2021-02-19 02:20:58 [main] INFO  MailMessage:107 - Attaching file: test
+2021-02-19 02:20:58 [main] INFO  MailMessage:113 - Setting filename: test
+2021-02-19 02:20:58 [main] INFO  MailMessage:107 - Attaching file: d:	est
+2021-02-19 02:20:58 [main] INFO  MailMessage:113 - Setting filename: d:	est
+2021-02-19 02:20:58 [main] INFO  MailMessage:85 - SendingMessage
+2021-02-19 02:21:00 [main] ERROR MailMessage:88 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:317) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:176) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:125) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send0(Transport.java:253) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send(Transport.java:124) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:86) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:32) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.Main.main(Main.java:45) [MailSender-0.1-jar-with-dependencies.jar:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	... 9 more
+2021-02-19 02:21:00 [main] INFO  MailMessage:31 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-19 02:21:00 [main] INFO  MailSession:29 - Getting session
+2021-02-19 02:21:00 [main] INFO  MailSession:41 - return created session
+2021-02-19 02:21:00 [main] INFO  MailMessage:39 - Session got
+2021-02-19 02:21:00 [main] INFO  MailMessage:41 - Settings from Email :emailFrom@mymail.com
+2021-02-19 02:21:00 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 02:21:00 [main] INFO  MailMessage:50 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 02:21:00 [main] INFO  MailMessage:62 - Settings Subject of Mail
+2021-02-19 02:21:00 [main] INFO  MailMessage:93 - Set message body: SomeText
+2021-02-19 02:21:00 [main] INFO  MailMessage:72 - Attaching files to Mail
+2021-02-19 02:21:00 [main] INFO  MailMessage:107 - Attaching file: test
+2021-02-19 02:21:00 [main] INFO  MailMessage:113 - Setting filename: test
+2021-02-19 02:21:00 [main] INFO  MailMessage:107 - Attaching file: d:	est
+2021-02-19 02:21:00 [main] INFO  MailMessage:113 - Setting filename: d:	est
+2021-02-19 02:21:00 [main] INFO  MailMessage:85 - SendingMessage
+2021-02-19 02:21:00 [main] ERROR MailMessage:88 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:317) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:176) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Service.connect(Service.java:125) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send0(Transport.java:253) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at javax.mail.Transport.send(Transport.java:124) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:86) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:32) [MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.mailsender.Main.main(Main.java:45) [MailSender-0.1-jar-with-dependencies.jar:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[MailSender-0.1-jar-with-dependencies.jar:?]
+	... 9 more
+2021-02-19 02:31:52 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-19 02:31:52 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-19 02:31:52 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-19 02:31:53 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@4ff8d125 }
+2021-02-19 02:31:53 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-19 02:31:53 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-19 02:31:53 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-19 02:31:53 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-19 02:31:53 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-19 02:31:53 [main] INFO  MailSession:29 - Getting session
+2021-02-19 02:31:53 [main] INFO  MailSession:38 - Creating session and return
+2021-02-19 02:31:53 [main] INFO  MailMessage:46 - Session got
+2021-02-19 02:31:53 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-19 02:31:53 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 02:31:53 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 02:31:53 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-19 02:31:53 [main] INFO  MailMessage:111 - Set message body: SomeText
+2021-02-19 02:31:53 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-19 02:31:53 [main] ERROR MailMessage:99 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:82) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-19 02:31:53 [main] INFO  MailMessage:103 - SendingMessage
+2021-02-19 02:31:53 [main] ERROR MailMessage:106 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:104) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-19 02:31:53 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-19 02:31:53 [main] INFO  MailSession:29 - Getting session
+2021-02-19 02:31:53 [main] INFO  MailSession:41 - return created session
+2021-02-19 02:31:53 [main] INFO  MailMessage:46 - Session got
+2021-02-19 02:31:53 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-19 02:31:53 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 02:31:53 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 02:31:53 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-19 02:31:53 [main] INFO  MailMessage:111 - Set message body: SomeText
+2021-02-19 02:31:53 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-19 02:31:53 [main] ERROR MailMessage:99 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:82) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-19 02:31:53 [main] INFO  MailMessage:103 - SendingMessage
+2021-02-19 02:31:53 [main] ERROR MailMessage:106 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:104) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-19 02:33:13 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-19 02:33:13 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-19 02:33:13 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-19 02:33:13 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@4ff8d125 }
+2021-02-19 02:33:13 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-19 02:33:13 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-19 02:33:13 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-19 02:33:13 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-19 02:33:13 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-19 02:33:13 [main] INFO  MailSession:29 - Getting session
+2021-02-19 02:33:13 [main] INFO  MailSession:38 - Creating session and return
+2021-02-19 02:33:13 [main] INFO  MailMessage:46 - Session got
+2021-02-19 02:33:13 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-19 02:33:13 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 02:33:13 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 02:33:13 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-19 02:33:13 [main] INFO  MailMessage:111 - Set message body: SomeText
+2021-02-19 02:33:13 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-19 02:33:13 [main] ERROR MailMessage:99 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:82) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-19 02:33:13 [main] INFO  MailMessage:103 - SendingMessage
+2021-02-19 02:33:19 [main] ERROR MailMessage:106 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:104) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-19 02:33:19 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-19 02:33:19 [main] INFO  MailSession:29 - Getting session
+2021-02-19 02:33:19 [main] INFO  MailSession:41 - return created session
+2021-02-19 02:33:19 [main] INFO  MailMessage:46 - Session got
+2021-02-19 02:33:19 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-19 02:33:19 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-19 02:33:19 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-19 02:33:19 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-19 02:33:19 [main] INFO  MailMessage:111 - Set message body: SomeText
+2021-02-19 02:33:19 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-19 02:33:19 [main] ERROR MailMessage:99 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:82) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-19 02:33:19 [main] INFO  MailMessage:103 - SendingMessage
+2021-02-19 02:33:19 [main] ERROR MailMessage:106 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:104) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
