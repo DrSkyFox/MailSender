@@ -1,7 +1,9 @@
+package com.mailsender;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.settings.ConnectionSettings;
-import com.settings.MailToTask;
+import com.mailsender.settings.ConnectionSettings;
+import com.mailsender.settings.MailToTask;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

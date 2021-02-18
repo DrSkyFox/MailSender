@@ -1,4 +1,6 @@
-import com.settings.MailToTask;
+package com.mailsender;
+
+import com.mailsender.settings.MailToTask;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;

@@ -1,4 +1,4 @@
-package com.settings;
+package com.mailsender.settings;
 
 public class ConnectionSettings {
 

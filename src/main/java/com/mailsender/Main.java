@@ -1,10 +1,8 @@
+package com.mailsender;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 

@@ -1,4 +1,4 @@
-package com.settings;
+package com.mailsender.settings;
 
 import java.util.List;
 
@@ -75,7 +75,7 @@ public class MailToTask {
 
     @Override
     public String toString() {
-        return "MailToTask{" +
+        return "com.mailsender.settings.MailToTask{" +
                 "fromEmail='" + fromEmail + '\'' +
                 ", sendListToEmail=" + sendListToEmail +
                 ", attachedFilesInDirectory=" + attachedFilesInDirectory +
