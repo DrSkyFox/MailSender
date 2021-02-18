@@ -74,7 +74,7 @@ public class ConfigInit  {
 
             return new MailSession(properties, settings.getAccountFullName(), settings.getPassword());
         } catch (IOException e) {
-            logger.warn(String.format("Error in reading configuration file: %s ", connectionConfig.toString()), e);
+            logger.error(String.format("Error in reading configuration file: %s ", connectionConfig.toString()), e);
         }
         return null;
     }
@@ -89,7 +89,7 @@ public class ConfigInit  {
             logger.info(String.format("Read file %s successful. Configuration is { %s }", taskConfig.toString(), mailSendTasks.toString()));
             return mailSendTasks;
         } catch (IOException e) {
-            logger.warn(String.format("Error in reading configuration file: %s ", taskConfig.toString()), e);
+            logger.error(String.format("Error in reading configuration file: %s ", taskConfig.toString()), e);
         }
         return null;
     }
@@ -111,7 +111,7 @@ public class ConfigInit  {
         try {
             objectMapper.writeValue(connectionConfig.toFile(), settings);
         } catch (IOException e) {
-            logger.warn( String.format("Cant write data to file: %s ", connectionConfig.toString()), e);
+            logger.error( String.format("Cant write data to file: %s ", connectionConfig.toString()), e);
         }
     }
 
@@ -145,7 +145,7 @@ public class ConfigInit  {
         try {
             objectMapper.writeValue(taskConfig.toFile(), mailToTaskList);
         } catch (IOException e) {
-            logger.warn( String.format("Cant write data to file: %s", taskConfig.toString()), e);
+            logger.error( String.format("Cant write data to file: %s", taskConfig.toString()), e);
         }
     }
 

@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="WARN" monitorInterval="30">
+
+    <!-- Logging Properties -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+        <Property name="APP_LOG_ROOT">/logs/</Property>
+    </Properties>
+
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
+
+        <!-- File Appenders on need basis -->
+        <RollingFile name="FileLog" fileName="${APP_LOG_ROOT}/mail.log"
+                     filePattern="${APP_LOG_ROOT}/mail-%d{yyyy-MM-dd}-%i.log">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+
     </Appenders>
+
     <Loggers>
-        <Logger name="com.mailsender.Main" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
+
+        <Logger name="com.mailsender" additivity="false" level="debug">
+            <AppenderRef ref="FileLog" />
+            <AppenderRef ref="Console"  />
         </Logger>
-        <Root level="error">
+
+        <Root level="warn">
             <AppenderRef ref="Console"/>
         </Root>
+
     </Loggers>
+
 </Configuration>

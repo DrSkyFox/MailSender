@@ -35,8 +35,10 @@ public class MailSession {
                             return new PasswordAuthentication(user, password);
                         }
                     });
+            logger.info("Creating session and return");
             return session;
         }
+        logger.info("return created session");
         return session;
     }
 

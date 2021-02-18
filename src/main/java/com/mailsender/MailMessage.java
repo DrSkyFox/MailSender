@@ -1,7 +1,8 @@
 package com.mailsender;
 
 import com.mailsender.settings.MailToTask;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
@@ -10,15 +11,13 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class MailMessage {
 
     private MailSession session;
     private List<MailToTask> tasks;
-    private static final Logger logger = Logger.getLogger(MailMessage.class.getName());
+    private static final Logger logger = LogManager.getLogger(MailMessage.class.getName());
 
     public MailMessage(ConfigInit configInit) {
         session = configInit.readConfigFileAndGetSession();
@@ -42,7 +41,7 @@ public class MailMessage {
             logger.info("Settings from Email :" + sendFromEmail);
             message.setFrom(new InternetAddress(sendFromEmail));
         } catch (MessagingException e) {
-            logger.log(Level.WARNING, "Cant set parameter: fromEmail", e);
+            logger.error("Cant set parameter: fromEmail", e);
         }
 
         for (String s : sendToEmail
@@ -52,7 +51,7 @@ public class MailMessage {
                 message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(s));
             } catch (MessagingException e) {
                 e.printStackTrace();
-                logger.log(Level.WARNING, "Cant set parameter: toEmails", e);
+                logger.error( "Cant set parameter: toEmails", e);
             }
         }
 
@@ -79,14 +78,14 @@ public class MailMessage {
             message.setContent(multipart);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.log(Level.WARNING, "SomeThing gonna wrong", e);
+            logger.error( "SomeThing gonna wrong", e);
         }
 
         try {
             logger.info("SendingMessage");
             Transport.send(message);
         } catch (MessagingException e) {
-            logger.log(Level.WARNING, "Cant send Email", e);
+            logger.error( "Cant send Email", e);
         }
     }
 
@@ -108,13 +107,13 @@ public class MailMessage {
             logger.info(String.format("Attaching file: %s", file));
             part.setDataHandler(new DataHandler(new FileDataSource(file)));
         } catch (MessagingException e) {
-            logger.log(Level.WARNING, String.format("Cant attach file: %s", file), e);
+            logger.error( String.format("Cant attach file: %s", file), e);
         }
         try {
             logger.info("Setting filename: " + file);
             part.setFileName(file);
         } catch (MessagingException e) {
-            logger.log(Level.WARNING, String.format("Cant set name in message body. File: %s", file), e);
+            logger.error( String.format("Cant set name in message body. File: %s", file), e);
         }
         return part;
     }
