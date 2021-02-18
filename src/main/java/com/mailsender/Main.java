@@ -1,14 +1,17 @@
 package com.mailsender;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.logging.Logger;
+
 
 
 public class Main {
 
-    private static final Logger logger = Logger.getLogger(Main.class.getName());
+    private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
 

@@ -10,7 +10,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class MailMessage {
@@ -72,7 +79,18 @@ public class MailMessage {
             logger.info("Attaching files to Mail");
             for (String file : files
             ) {
-                multipart.addBodyPart(getAttachFilePart(file));
+                if(Files.exists(Path.of(file)) && !Files.isDirectory(Path.of(file))) {
+                    logger.info(String.format("%s is file. Attach to message"));
+                    multipart.addBodyPart(getAttachFilePart(file));
+                } else if(Files.exists(Path.of(file)) && Files.isDirectory(Path.of(file))) {
+                    logger.info(String.format("%s is directory", file));
+                    Set<String> listFilesInDir = listFilesUsingFileWalk(file);
+                    for (String strFile: listFilesInDir
+                         ) {
+                        logger.info(String.format("Attach file %s from dir %s", strFile, file));
+                        multipart.addBodyPart(getAttachFilePart(strFile));
+                    }
+                }
             }
 
             message.setContent(multipart);
@@ -102,20 +120,32 @@ public class MailMessage {
     }
 
     private BodyPart getAttachFilePart(String file) {
-        BodyPart part = new MimeBodyPart();
-        try {
-            logger.info(String.format("Attaching file: %s", file));
-            part.setDataHandler(new DataHandler(new FileDataSource(file)));
-        } catch (MessagingException e) {
-            logger.error( String.format("Cant attach file: %s", file), e);
+
+            BodyPart part = new MimeBodyPart();
+            try {
+                logger.info(String.format("Attaching file: %s", file));
+                part.setDataHandler(new DataHandler(new FileDataSource(file)));
+            } catch (MessagingException e) {
+                logger.error(String.format("Cant attach file: %s", file), e);
+            }
+            try {
+                logger.info("Setting filename: " + file);
+                part.setFileName(file);
+            } catch (MessagingException e) {
+                logger.error(String.format("Cant set name in message body. File: %s", file), e);
+            }
+            return part;
+    }
+
+    public Set<String> listFilesUsingFileWalk(String dir) throws IOException {
+        logger.info(String.format("Getting file list in dir : %s" , dir));
+        try (Stream<Path> stream = Files.walk(Paths.get(dir))) {
+            return stream
+                    .filter(file -> !Files.isDirectory(file))
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .collect(Collectors.toSet());
         }
-        try {
-            logger.info("Setting filename: " + file);
-            part.setFileName(file);
-        } catch (MessagingException e) {
-            logger.error( String.format("Cant set name in message body. File: %s", file), e);
-        }
-        return part;
     }
 
 
