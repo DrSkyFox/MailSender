@@ -441,3 +441,1425 @@ Caused by: java.net.UnknownHostException: smtp.example.ru
 	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
 	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
 	... 9 more
+2021-02-24 14:34:37 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 14:34:37 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-24 14:34:37 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 14:34:37 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@4ff8d125 }
+2021-02-24 14:34:37 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 14:34:37 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 14:34:37 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 14:34:37 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-24 14:34:37 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 14:34:37 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:34:37 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 14:34:37 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:34:37 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:34:37 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:34:37 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:34:37 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:34:37 [main] INFO  MailMessage:111 - Set message body: SomeText
+2021-02-24 14:34:37 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:34:37 [main] ERROR MailMessage:99 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:82) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-24 14:34:37 [main] INFO  MailMessage:103 - SendingMessage
+2021-02-24 14:34:38 [main] ERROR MailMessage:106 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:104) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 14:34:38 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 14:34:38 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:34:38 [main] INFO  MailSession:41 - return created session
+2021-02-24 14:34:38 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:34:38 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:34:38 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:34:38 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:34:38 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:34:38 [main] INFO  MailMessage:111 - Set message body: SomeText
+2021-02-24 14:34:38 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:34:38 [main] ERROR MailMessage:99 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:82) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-24 14:34:38 [main] INFO  MailMessage:103 - SendingMessage
+2021-02-24 14:34:38 [main] ERROR MailMessage:106 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:104) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 14:36:32 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 14:36:32 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-24 14:36:32 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 14:36:32 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@4ff8d125 }
+2021-02-24 14:36:32 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 14:36:32 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 14:36:32 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 14:36:32 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-24 14:36:32 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 14:36:32 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:36:32 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 14:36:32 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:36:32 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:36:32 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:36:32 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:36:32 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:36:32 [main] INFO  MailMessage:112 - Set message body: SomeText
+2021-02-24 14:36:32 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:36:32 [main] INFO  MailMessage:82 - File in for: test 
+2021-02-24 14:36:32 [main] INFO  MailMessage:82 - File in for: d:	est 
+2021-02-24 14:36:32 [main] ERROR MailMessage:100 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:83) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-24 14:36:32 [main] INFO  MailMessage:104 - SendingMessage
+2021-02-24 14:36:40 [main] ERROR MailMessage:107 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:105) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 14:36:40 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[test, d:	est], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 14:36:40 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:36:40 [main] INFO  MailSession:41 - return created session
+2021-02-24 14:36:40 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:36:40 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:36:40 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:36:40 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:36:40 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:36:40 [main] INFO  MailMessage:112 - Set message body: SomeText
+2021-02-24 14:36:40 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:36:40 [main] INFO  MailMessage:82 - File in for: test 
+2021-02-24 14:36:40 [main] INFO  MailMessage:82 - File in for: d:	est 
+2021-02-24 14:36:40 [main] ERROR MailMessage:100 - SomeThing gonna wrong
+java.nio.file.InvalidPathException: Illegal char <	> at index 2: d:	est
+	at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153) ~[?:?]
+	at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77) ~[?:?]
+	at sun.nio.fs.WindowsPath.parse(WindowsPath.java:92) ~[?:?]
+	at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:229) ~[?:?]
+	at java.nio.file.Path.of(Path.java:147) ~[?:?]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:83) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+2021-02-24 14:36:40 [main] INFO  MailMessage:104 - SendingMessage
+2021-02-24 14:36:40 [main] ERROR MailMessage:107 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:105) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 14:39:15 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 14:39:15 [main] INFO  ConfigInit:43 - Configuration file 'connection_settings.json' not found.. Create example file config
+2021-02-24 14:39:15 [main] INFO  ConfigInit:99 - Creating example configuration file: connection_settings.json
+2021-02-24 14:39:15 [main] INFO  ConfigInit:109 - Writing data: { com.mailsender.settings.ConnectionSettings@7f8a9499 } to file: connection_settings.json
+2021-02-24 14:39:15 [main] INFO  ConfigInit:48 - Configuration file 'sender_settings.json' not found.. Create example file config
+2021-02-24 14:39:15 [main] INFO  ConfigInit:119 - Creating example configuration file: sender_settings.json
+2021-02-24 14:39:15 [main] INFO  ConfigInit:144 - Writing data: { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}] } to file sender_settings.json
+2021-02-24 14:39:15 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-24 14:39:15 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 14:39:15 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@5ba88be8 }
+2021-02-24 14:39:15 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 14:39:15 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 14:39:15 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 14:39:15 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-24 14:39:15 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 14:39:15 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:39:15 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 14:39:15 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:39:15 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:39:15 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:39:15 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:39:15 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:39:15 [main] INFO  MailMessage:112 - Set message body: SomeText
+2021-02-24 14:39:15 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:39:15 [main] INFO  MailMessage:82 - File in for: d:\test2 
+2021-02-24 14:39:15 [main] INFO  MailMessage:82 - File in for: d:\test 
+2021-02-24 14:39:15 [main] INFO  MailMessage:87 - d:\test is directory
+2021-02-24 14:39:15 [main] INFO  MailMessage:142 - Getting file list in dir : d:\test
+2021-02-24 14:39:15 [main] INFO  MailMessage:104 - SendingMessage
+2021-02-24 14:39:23 [main] ERROR MailMessage:107 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:105) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 14:39:23 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 14:39:23 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:39:23 [main] INFO  MailSession:41 - return created session
+2021-02-24 14:39:23 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:39:23 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:39:23 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:39:23 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:39:23 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:39:23 [main] INFO  MailMessage:112 - Set message body: SomeText
+2021-02-24 14:39:23 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:39:23 [main] INFO  MailMessage:82 - File in for: d:\test2 
+2021-02-24 14:39:23 [main] INFO  MailMessage:82 - File in for: d:\test 
+2021-02-24 14:39:23 [main] INFO  MailMessage:87 - d:\test is directory
+2021-02-24 14:39:23 [main] INFO  MailMessage:142 - Getting file list in dir : d:\test
+2021-02-24 14:39:23 [main] INFO  MailMessage:104 - SendingMessage
+2021-02-24 14:39:23 [main] ERROR MailMessage:107 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:105) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 14:57:40 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 14:57:40 [main] INFO  ConfigInit:60 - Getting Session's parametrs
+2021-02-24 14:57:40 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 14:57:40 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is { com.mailsender.settings.ConnectionSettings@4ff8d125 }
+2021-02-24 14:57:40 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 14:57:40 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 14:57:40 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 14:57:40 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is { [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}] }
+2021-02-24 14:57:40 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 14:57:40 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:57:40 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 14:57:40 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:57:40 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:57:40 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:57:40 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:57:40 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:57:40 [main] INFO  MailMessage:113 - Set message body: SomeText
+2021-02-24 14:57:40 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:57:40 [main] INFO  MailMessage:82 - File in for: d:\test2 
+2021-02-24 14:57:40 [main] INFO  MailMessage:82 - File in for: d:\test 
+2021-02-24 14:57:40 [main] INFO  MailMessage:87 - d:\test is directory
+2021-02-24 14:57:40 [main] INFO  MailMessage:143 - Getting file list in dir : d:\test
+2021-02-24 14:57:40 [main] INFO  MailMessage:91 - Attach file 2.txt from dir d:\test
+2021-02-24 14:57:40 [main] INFO  MailMessage:128 - Attaching file: 2.txt
+2021-02-24 14:57:40 [main] INFO  MailMessage:134 - Setting filename: 2.txt
+2021-02-24 14:57:40 [main] INFO  MailMessage:91 - Attach file 1.txt from dir d:\test
+2021-02-24 14:57:40 [main] INFO  MailMessage:128 - Attaching file: 1.txt
+2021-02-24 14:57:40 [main] INFO  MailMessage:134 - Setting filename: 1.txt
+2021-02-24 14:57:40 [main] INFO  MailMessage:105 - SendingMessage
+2021-02-24 14:57:41 [main] ERROR MailMessage:108 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:106) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 14:57:41 [main] INFO  MailMessage:38 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 14:57:41 [main] INFO  MailSession:29 - Getting session
+2021-02-24 14:57:41 [main] INFO  MailSession:41 - return created session
+2021-02-24 14:57:41 [main] INFO  MailMessage:46 - Session got
+2021-02-24 14:57:41 [main] INFO  MailMessage:48 - Settings from Email :emailFrom@mymail.com
+2021-02-24 14:57:41 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail1@targetmail.com
+2021-02-24 14:57:41 [main] INFO  MailMessage:57 - Settings to Email :sendToEmail2@targetmail.com
+2021-02-24 14:57:41 [main] INFO  MailMessage:69 - Settings Subject of Mail
+2021-02-24 14:57:41 [main] INFO  MailMessage:113 - Set message body: SomeText
+2021-02-24 14:57:41 [main] INFO  MailMessage:79 - Attaching files to Mail
+2021-02-24 14:57:41 [main] INFO  MailMessage:82 - File in for: d:\test2 
+2021-02-24 14:57:41 [main] INFO  MailMessage:82 - File in for: d:\test 
+2021-02-24 14:57:41 [main] INFO  MailMessage:87 - d:\test is directory
+2021-02-24 14:57:41 [main] INFO  MailMessage:143 - Getting file list in dir : d:\test
+2021-02-24 14:57:41 [main] INFO  MailMessage:91 - Attach file 2.txt from dir d:\test
+2021-02-24 14:57:41 [main] INFO  MailMessage:128 - Attaching file: 2.txt
+2021-02-24 14:57:41 [main] INFO  MailMessage:134 - Setting filename: 2.txt
+2021-02-24 14:57:41 [main] INFO  MailMessage:91 - Attach file 1.txt from dir d:\test
+2021-02-24 14:57:41 [main] INFO  MailMessage:128 - Attaching file: 1.txt
+2021-02-24 14:57:41 [main] INFO  MailMessage:134 - Setting filename: 1.txt
+2021-02-24 14:57:41 [main] INFO  MailMessage:105 - SendingMessage
+2021-02-24 14:57:41 [main] ERROR MailMessage:108 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:106) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:39) [classes/:?]
+	at com.mailsender.Main.main(Main.java:48) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 15:50:28 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 15:50:28 [main] INFO  Main:22 - chek args: {}
+2021-02-24 15:50:28 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 15:50:28 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 15:50:28 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 15:50:28 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 15:50:28 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 15:50:28 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 15:50:28 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@6cc558c6
+2021-02-24 15:50:28 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 15:50:28 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 15:50:28 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 15:50:28 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 15:50:28 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 15:50:28 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 15:50:28 [main] INFO  MailSession:29 - Getting session
+2021-02-24 15:50:28 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 15:50:28 [main] INFO  MailMessage:50 - Session got
+2021-02-24 15:50:28 [main] INFO  MailMessage:52 - Settings from Email :emailFrom@mymail.com
+2021-02-24 15:50:28 [main] INFO  MailMessage:58 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 15:50:28 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 15:50:28 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 15:50:28 [main] INFO  MailMessage:72 - Settings Subject of Mail
+2021-02-24 15:50:28 [main] INFO  MailMessage:82 - set text message body. text: SomeText
+2021-02-24 15:50:28 [main] INFO  MailMessage:88 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 15:50:28 [main] INFO  MailMessage:118 - FileList: [d:\test2, d:\test]
+2021-02-24 15:50:28 [main] INFO  MailMessage:122 - File d:\test2 is dir - false
+2021-02-24 15:50:28 [main] INFO  MailMessage:124 - Add file: {} to listFiles
+2021-02-24 15:50:28 [main] INFO  MailMessage:122 - File d:\test is dir - true
+2021-02-24 15:50:28 [main] INFO  MailMessage:127 - Get Collection of file
+2021-02-24 15:50:28 [main] INFO  MailMessage:136 - Get file list from dir: d:\test
+2021-02-24 15:50:28 [main] INFO  MailMessage:90 - attacheListFile: [3.txt, 2.txt, d:\test2, 4.txt, 1.txt]
+2021-02-24 15:50:28 [main] INFO  MailMessage:94 - attaching file 3.txt to body email
+2021-02-24 15:50:28 [main] INFO  MailMessage:163 - Attaching file to body: 3.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:169 - Setting filename: 3.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:94 - attaching file 2.txt to body email
+2021-02-24 15:50:28 [main] INFO  MailMessage:163 - Attaching file to body: 2.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:169 - Setting filename: 2.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:94 - attaching file d:\test2 to body email
+2021-02-24 15:50:28 [main] INFO  MailMessage:163 - Attaching file to body: d:\test2
+2021-02-24 15:50:28 [main] INFO  MailMessage:169 - Setting filename: d:\test2
+2021-02-24 15:50:28 [main] INFO  MailMessage:94 - attaching file 4.txt to body email
+2021-02-24 15:50:28 [main] INFO  MailMessage:163 - Attaching file to body: 4.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:169 - Setting filename: 4.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:94 - attaching file 1.txt to body email
+2021-02-24 15:50:28 [main] INFO  MailMessage:163 - Attaching file to body: 1.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:169 - Setting filename: 1.txt
+2021-02-24 15:50:28 [main] INFO  MailMessage:102 - Setting content email. Add all body's to Email Message
+2021-02-24 15:50:28 [main] INFO  MailMessage:109 - SendingMessage
+2021-02-24 15:50:29 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 15:50:29 [main] INFO  Main:22 - chek args: {}
+2021-02-24 15:50:29 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 15:50:29 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 15:50:29 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 15:50:29 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 15:50:29 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 15:50:29 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 15:50:29 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 15:50:29 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 15:50:29 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 15:50:29 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 15:50:29 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 15:50:29 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 15:50:29 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 15:50:29 [main] INFO  MailSession:29 - Getting session
+2021-02-24 15:50:29 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 15:50:29 [main] INFO  MailMessage:50 - Session got
+2021-02-24 15:50:29 [main] INFO  MailMessage:52 - Settings from Email :emailFrom@mymail.com
+2021-02-24 15:50:29 [main] INFO  MailMessage:58 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 15:50:29 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 15:50:29 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 15:50:29 [main] INFO  MailMessage:72 - Settings Subject of Mail
+2021-02-24 15:50:29 [main] INFO  MailMessage:82 - set text message body. text: SomeText
+2021-02-24 15:50:29 [main] INFO  MailMessage:88 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 15:50:29 [main] INFO  MailMessage:118 - FileList: [d:\test2, d:\test]
+2021-02-24 15:50:29 [main] INFO  MailMessage:122 - File d:\test2 is dir - false
+2021-02-24 15:50:29 [main] INFO  MailMessage:124 - Add file: {} to listFiles
+2021-02-24 15:50:29 [main] INFO  MailMessage:122 - File d:\test is dir - true
+2021-02-24 15:50:29 [main] INFO  MailMessage:127 - Get Collection of file
+2021-02-24 15:50:29 [main] INFO  MailMessage:136 - Get file list from dir: d:\test
+2021-02-24 15:50:29 [main] INFO  MailMessage:90 - attacheListFile: [3.txt, 2.txt, d:\test2, 4.txt, 1.txt]
+2021-02-24 15:50:29 [main] INFO  MailMessage:94 - attaching file 3.txt to body email
+2021-02-24 15:50:29 [main] INFO  MailMessage:163 - Attaching file to body: 3.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:169 - Setting filename: 3.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:94 - attaching file 2.txt to body email
+2021-02-24 15:50:29 [main] INFO  MailMessage:163 - Attaching file to body: 2.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:169 - Setting filename: 2.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:94 - attaching file d:\test2 to body email
+2021-02-24 15:50:29 [main] INFO  MailMessage:163 - Attaching file to body: d:\test2
+2021-02-24 15:50:29 [main] INFO  MailMessage:169 - Setting filename: d:\test2
+2021-02-24 15:50:29 [main] INFO  MailMessage:94 - attaching file 4.txt to body email
+2021-02-24 15:50:29 [main] INFO  MailMessage:163 - Attaching file to body: 4.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:169 - Setting filename: 4.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:94 - attaching file 1.txt to body email
+2021-02-24 15:50:29 [main] INFO  MailMessage:163 - Attaching file to body: 1.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:169 - Setting filename: 1.txt
+2021-02-24 15:50:29 [main] INFO  MailMessage:102 - Setting content email. Add all body's to Email Message
+2021-02-24 15:50:29 [main] INFO  MailMessage:109 - SendingMessage
+2021-02-24 15:50:36 [main] ERROR MailMessage:112 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:110) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 15:50:36 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 15:50:36 [main] INFO  MailSession:29 - Getting session
+2021-02-24 15:50:36 [main] INFO  MailSession:41 - return created session
+2021-02-24 15:50:36 [main] INFO  MailMessage:50 - Session got
+2021-02-24 15:50:36 [main] INFO  MailMessage:52 - Settings from Email :emailFrom@mymail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:58 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:72 - Settings Subject of Mail
+2021-02-24 15:50:36 [main] INFO  MailMessage:82 - set text message body. text: SomeText
+2021-02-24 15:50:36 [main] INFO  MailMessage:88 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 15:50:36 [main] INFO  MailMessage:118 - FileList: [d:\test2, d:\test]
+2021-02-24 15:50:36 [main] INFO  MailMessage:122 - File d:\test2 is dir - false
+2021-02-24 15:50:36 [main] INFO  MailMessage:124 - Add file: {} to listFiles
+2021-02-24 15:50:36 [main] INFO  MailMessage:122 - File d:\test is dir - true
+2021-02-24 15:50:36 [main] INFO  MailMessage:127 - Get Collection of file
+2021-02-24 15:50:36 [main] INFO  MailMessage:136 - Get file list from dir: d:\test
+2021-02-24 15:50:36 [main] INFO  MailMessage:90 - attacheListFile: [3.txt, 2.txt, d:\test2, 4.txt, 1.txt]
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 3.txt to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 3.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 3.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 2.txt to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 2.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 2.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file d:\test2 to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: d:\test2
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: d:\test2
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 4.txt to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 4.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 4.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 1.txt to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 1.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 1.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:102 - Setting content email. Add all body's to Email Message
+2021-02-24 15:50:36 [main] INFO  MailMessage:109 - SendingMessage
+2021-02-24 15:50:36 [main] ERROR MailMessage:112 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:110) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 15:50:36 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 15:50:36 [main] INFO  MailSession:29 - Getting session
+2021-02-24 15:50:36 [main] INFO  MailSession:41 - return created session
+2021-02-24 15:50:36 [main] INFO  MailMessage:50 - Session got
+2021-02-24 15:50:36 [main] INFO  MailMessage:52 - Settings from Email :emailFrom@mymail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:58 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:62 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 15:50:36 [main] INFO  MailMessage:72 - Settings Subject of Mail
+2021-02-24 15:50:36 [main] INFO  MailMessage:82 - set text message body. text: SomeText
+2021-02-24 15:50:36 [main] INFO  MailMessage:88 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 15:50:36 [main] INFO  MailMessage:118 - FileList: [d:\test2, d:\test]
+2021-02-24 15:50:36 [main] INFO  MailMessage:122 - File d:\test2 is dir - false
+2021-02-24 15:50:36 [main] INFO  MailMessage:124 - Add file: {} to listFiles
+2021-02-24 15:50:36 [main] INFO  MailMessage:122 - File d:\test is dir - true
+2021-02-24 15:50:36 [main] INFO  MailMessage:127 - Get Collection of file
+2021-02-24 15:50:36 [main] INFO  MailMessage:136 - Get file list from dir: d:\test
+2021-02-24 15:50:36 [main] INFO  MailMessage:90 - attacheListFile: [3.txt, 2.txt, d:\test2, 4.txt, 1.txt]
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 3.txt to body email
+2021-02-24 15:50:36 [main] ERROR MailMessage:112 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:110) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 3.txt
+2021-02-24 15:50:36 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 3.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 2.txt to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 2.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 2.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file d:\test2 to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: d:\test2
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: d:\test2
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 4.txt to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 4.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 4.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:94 - attaching file 1.txt to body email
+2021-02-24 15:50:36 [main] INFO  MailMessage:163 - Attaching file to body: 1.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:169 - Setting filename: 1.txt
+2021-02-24 15:50:36 [main] INFO  MailMessage:102 - Setting content email. Add all body's to Email Message
+2021-02-24 15:50:36 [main] INFO  MailMessage:109 - SendingMessage
+2021-02-24 15:50:36 [main] ERROR MailMessage:112 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:110) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 15:50:36 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 15:59:15 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 15:59:15 [main] INFO  Main:22 - chek args: {}
+2021-02-24 15:59:15 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 15:59:15 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 15:59:15 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 15:59:15 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 15:59:15 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 15:59:15 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 15:59:16 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 15:59:16 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 15:59:16 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 15:59:16 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 15:59:16 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 15:59:16 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 15:59:16 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 15:59:16 [main] INFO  MailSession:29 - Getting session
+2021-02-24 15:59:16 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 15:59:16 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 15:59:16 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 15:59:16 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 15:59:16 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 15:59:16 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 15:59:16 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 15:59:16 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 15:59:16 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test]
+2021-02-24 15:59:16 [main] INFO  MailMessage:140 - File d:\test2 is dir - false
+2021-02-24 15:59:16 [main] INFO  MailMessage:142 - Add file: {} to listFiles
+2021-02-24 15:59:16 [main] INFO  MailMessage:140 - File d:\test is dir - true
+2021-02-24 15:59:16 [main] INFO  MailMessage:145 - Get Collection of file
+2021-02-24 15:59:16 [main] INFO  MailMessage:160 - Get file list from dir: d:\test
+2021-02-24 15:59:16 [main] INFO  MailMessage:123 - attacheListFile: [3.txt, 2.txt, d:\test2, 4.txt, 1.txt]
+2021-02-24 15:59:16 [main] INFO  MailMessage:127 - attaching file 3.txt to body email
+2021-02-24 15:59:16 [main] INFO  MailMessage:187 - Attaching file to body: 3.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:193 - Setting filename: 3.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:127 - attaching file 2.txt to body email
+2021-02-24 15:59:16 [main] INFO  MailMessage:187 - Attaching file to body: 2.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:193 - Setting filename: 2.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:127 - attaching file d:\test2 to body email
+2021-02-24 15:59:16 [main] INFO  MailMessage:187 - Attaching file to body: d:\test2
+2021-02-24 15:59:16 [main] INFO  MailMessage:193 - Setting filename: d:\test2
+2021-02-24 15:59:16 [main] INFO  MailMessage:127 - attaching file 4.txt to body email
+2021-02-24 15:59:16 [main] INFO  MailMessage:187 - Attaching file to body: 4.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:193 - Setting filename: 4.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:127 - attaching file 1.txt to body email
+2021-02-24 15:59:16 [main] INFO  MailMessage:187 - Attaching file to body: 1.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:193 - Setting filename: 1.txt
+2021-02-24 15:59:16 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 15:59:16 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 15:59:17 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 15:59:17 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 15:59:17 [main] INFO  MailSession:29 - Getting session
+2021-02-24 15:59:17 [main] INFO  MailSession:41 - return created session
+2021-02-24 15:59:17 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 15:59:17 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 15:59:17 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 15:59:17 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 15:59:17 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 15:59:17 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 15:59:17 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 15:59:17 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test]
+2021-02-24 15:59:17 [main] INFO  MailMessage:140 - File d:\test2 is dir - false
+2021-02-24 15:59:17 [main] INFO  MailMessage:142 - Add file: {} to listFiles
+2021-02-24 15:59:17 [main] INFO  MailMessage:140 - File d:\test is dir - true
+2021-02-24 15:59:17 [main] INFO  MailMessage:145 - Get Collection of file
+2021-02-24 15:59:17 [main] INFO  MailMessage:160 - Get file list from dir: d:\test
+2021-02-24 15:59:17 [main] INFO  MailMessage:123 - attacheListFile: [3.txt, 2.txt, d:\test2, 4.txt, 1.txt]
+2021-02-24 15:59:17 [main] INFO  MailMessage:127 - attaching file 3.txt to body email
+2021-02-24 15:59:17 [main] INFO  MailMessage:187 - Attaching file to body: 3.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:193 - Setting filename: 3.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:127 - attaching file 2.txt to body email
+2021-02-24 15:59:17 [main] INFO  MailMessage:187 - Attaching file to body: 2.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:193 - Setting filename: 2.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:127 - attaching file d:\test2 to body email
+2021-02-24 15:59:17 [main] INFO  MailMessage:187 - Attaching file to body: d:\test2
+2021-02-24 15:59:17 [main] INFO  MailMessage:193 - Setting filename: d:\test2
+2021-02-24 15:59:17 [main] INFO  MailMessage:127 - attaching file 4.txt to body email
+2021-02-24 15:59:17 [main] INFO  MailMessage:187 - Attaching file to body: 4.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:193 - Setting filename: 4.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:127 - attaching file 1.txt to body email
+2021-02-24 15:59:17 [main] INFO  MailMessage:187 - Attaching file to body: 1.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:193 - Setting filename: 1.txt
+2021-02-24 15:59:17 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 15:59:17 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 15:59:17 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 15:59:17 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:03:07 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:03:07 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:03:07 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:03:07 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:03:07 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:03:07 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:03:07 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:03:07 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:03:07 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@327bcebd
+2021-02-24 16:03:07 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:03:07 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:03:07 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:03:07 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 16:03:07 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:03:07 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 16:03:07 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:03:07 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:03:07 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 16:03:07 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 16:03:07 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 16:03:07 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 16:03:07 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 16:03:07 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 16:03:07 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:03:07 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test]
+2021-02-24 16:03:07 [main] INFO  MailMessage:140 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:03:07 [main] INFO  MailMessage:150 - File d:\test2 not found
+2021-02-24 16:03:07 [main] INFO  MailMessage:140 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:03:07 [main] INFO  MailMessage:146 - Get Collection of file
+2021-02-24 16:03:07 [main] INFO  MailMessage:158 - Get file list from dir: d:\test
+2021-02-24 16:03:07 [main] INFO  MailMessage:123 - attacheListFile: [3.txt, 2.txt, 4.txt, 1.txt]
+2021-02-24 16:03:07 [main] INFO  MailMessage:127 - attaching file 3.txt to body email
+2021-02-24 16:03:07 [main] INFO  MailMessage:185 - Attaching file to body: 3.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:191 - Setting filename: 3.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:127 - attaching file 2.txt to body email
+2021-02-24 16:03:07 [main] INFO  MailMessage:185 - Attaching file to body: 2.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:191 - Setting filename: 2.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:127 - attaching file 4.txt to body email
+2021-02-24 16:03:07 [main] INFO  MailMessage:185 - Attaching file to body: 4.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:191 - Setting filename: 4.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:127 - attaching file 1.txt to body email
+2021-02-24 16:03:07 [main] INFO  MailMessage:185 - Attaching file to body: 1.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:191 - Setting filename: 1.txt
+2021-02-24 16:03:07 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 16:03:07 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 16:03:10 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 16:03:10 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 16:03:10 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:03:10 [main] INFO  MailSession:41 - return created session
+2021-02-24 16:03:10 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 16:03:10 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 16:03:10 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 16:03:10 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 16:03:10 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 16:03:10 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 16:03:10 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:03:10 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test]
+2021-02-24 16:03:10 [main] INFO  MailMessage:140 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:03:10 [main] INFO  MailMessage:150 - File d:\test2 not found
+2021-02-24 16:03:10 [main] INFO  MailMessage:140 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:03:10 [main] INFO  MailMessage:146 - Get Collection of file
+2021-02-24 16:03:10 [main] INFO  MailMessage:158 - Get file list from dir: d:\test
+2021-02-24 16:03:10 [main] INFO  MailMessage:123 - attacheListFile: [3.txt, 2.txt, 4.txt, 1.txt]
+2021-02-24 16:03:10 [main] INFO  MailMessage:127 - attaching file 3.txt to body email
+2021-02-24 16:03:10 [main] INFO  MailMessage:185 - Attaching file to body: 3.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:191 - Setting filename: 3.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:127 - attaching file 2.txt to body email
+2021-02-24 16:03:10 [main] INFO  MailMessage:185 - Attaching file to body: 2.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:191 - Setting filename: 2.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:127 - attaching file 4.txt to body email
+2021-02-24 16:03:10 [main] INFO  MailMessage:185 - Attaching file to body: 4.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:191 - Setting filename: 4.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:127 - attaching file 1.txt to body email
+2021-02-24 16:03:10 [main] INFO  MailMessage:185 - Attaching file to body: 1.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:191 - Setting filename: 1.txt
+2021-02-24 16:03:10 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 16:03:10 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 16:03:10 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 16:03:10 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:04:38 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:04:38 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:04:38 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:04:38 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:04:38 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:04:38 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:04:38 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:04:38 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:04:39 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 16:04:39 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:04:39 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:04:39 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:04:39 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 16:04:39 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:04:39 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 16:04:39 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:04:39 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:04:39 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 16:04:39 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 16:04:39 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:04:39 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test]
+2021-02-24 16:04:39 [main] INFO  MailMessage:140 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:04:39 [main] INFO  MailMessage:150 - File d:\test2 not found
+2021-02-24 16:04:39 [main] INFO  MailMessage:140 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:04:39 [main] INFO  MailMessage:146 - Get Collection of file
+2021-02-24 16:04:39 [main] INFO  MailMessage:158 - Get file list from dir: d:\test
+2021-02-24 16:04:39 [main] INFO  MailMessage:123 - attacheListFile: [3.txt, 2.txt, 4.txt, 1.txt]
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 3.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 3.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 3.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 2.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 2.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 2.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 4.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 4.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 4.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 1.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 1.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 1.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 16:04:39 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 16:04:39 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 16:04:39 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 16:04:39 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:04:39 [main] INFO  MailSession:41 - return created session
+2021-02-24 16:04:39 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 16:04:39 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 16:04:39 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 16:04:39 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test, d:\test3\1.txt]
+2021-02-24 16:04:39 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test, d:\test3\1.txt]
+2021-02-24 16:04:39 [main] INFO  MailMessage:140 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:04:39 [main] INFO  MailMessage:150 - File d:\test2 not found
+2021-02-24 16:04:39 [main] INFO  MailMessage:140 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:04:39 [main] INFO  MailMessage:146 - Get Collection of file
+2021-02-24 16:04:39 [main] INFO  MailMessage:158 - Get file list from dir: d:\test
+2021-02-24 16:04:39 [main] INFO  MailMessage:140 - File d:\test3\1.txt: isExist true,  is dir - false
+2021-02-24 16:04:39 [main] INFO  MailMessage:143 - Add file: {} to listFiles
+2021-02-24 16:04:39 [main] INFO  MailMessage:123 - attacheListFile: [3.txt, 2.txt, 4.txt, 1.txt, d:\test3\1.txt]
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 3.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 3.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 3.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 2.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 2.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 2.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 4.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 4.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 4.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file 1.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: 1.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: 1.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:127 - attaching file d:\test3\1.txt to body email
+2021-02-24 16:04:39 [main] INFO  MailMessage:185 - Attaching file to body: d:\test3\1.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:191 - Setting filename: d:\test3\1.txt
+2021-02-24 16:04:39 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 16:04:39 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 16:04:39 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 16:04:39 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:06:48 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:06:48 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:06:48 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:06:48 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:06:48 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:06:48 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:06:48 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:06:48 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:06:48 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 16:06:48 [main] INFO  MailSession:22 - Entering parameters: 
+ user = login 
+ password = password 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.example.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:06:48 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:06:48 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:06:48 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 16:06:48 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:06:48 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 16:06:48 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:06:48 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:06:48 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 16:06:48 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 16:06:48 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 16:06:48 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 16:06:48 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 16:06:48 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 16:06:48 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:06:48 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test]
+2021-02-24 16:06:48 [main] INFO  MailMessage:140 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:06:48 [main] INFO  MailMessage:150 - File d:\test2 not found
+2021-02-24 16:06:48 [main] INFO  MailMessage:140 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:06:48 [main] INFO  MailMessage:146 - Get Collection of file
+2021-02-24 16:06:48 [main] INFO  MailMessage:158 - Get file list from dir: d:\test
+2021-02-24 16:06:48 [main] INFO  MailMessage:123 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test\test\3.txt]
+2021-02-24 16:06:48 [main] INFO  MailMessage:127 - attaching file d:\test\2.txt to body email
+2021-02-24 16:06:48 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:191 - Setting filename: d:\test\2.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:127 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:06:48 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:191 - Setting filename: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:127 - attaching file d:\test\1.txt to body email
+2021-02-24 16:06:48 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:191 - Setting filename: d:\test\1.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:127 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:06:48 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:191 - Setting filename: d:\test\test\3.txt
+2021-02-24 16:06:48 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 16:06:48 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 16:06:54 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 16:06:54 [main] INFO  MailMessage:40 - start task : com.mailsender.settings.MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}
+2021-02-24 16:06:54 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:06:54 [main] INFO  MailSession:41 - return created session
+2021-02-24 16:06:54 [main] INFO  MailMessage:78 - Settings from Email :emailFrom@mymail.com
+2021-02-24 16:06:54 [main] INFO  MailMessage:86 - Recipients of Email: {}emailFrom@mymail.com
+2021-02-24 16:06:54 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail1@targetmail.com
+2021-02-24 16:06:54 [main] INFO  MailMessage:90 - Add addRecipient: sendToEmail2@targetmail.com
+2021-02-24 16:06:54 [main] INFO  MailMessage:101 - Settings Subject of Mail
+2021-02-24 16:06:54 [main] INFO  MailMessage:113 - set text message body. text: SomeText
+2021-02-24 16:06:54 [main] INFO  MailMessage:121 - Prepare to attach files [d:\test2, d:\test, d:\test3\1.txt]
+2021-02-24 16:06:54 [main] INFO  MailMessage:136 - FileList: [d:\test2, d:\test, d:\test3\1.txt]
+2021-02-24 16:06:54 [main] INFO  MailMessage:140 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:06:54 [main] INFO  MailMessage:150 - File d:\test2 not found
+2021-02-24 16:06:54 [main] INFO  MailMessage:140 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:06:54 [main] INFO  MailMessage:146 - Get Collection of file
+2021-02-24 16:06:54 [main] INFO  MailMessage:158 - Get file list from dir: d:\test
+2021-02-24 16:06:54 [main] INFO  MailMessage:140 - File d:\test3\1.txt: isExist true,  is dir - false
+2021-02-24 16:06:54 [main] INFO  MailMessage:143 - Add file: {} to listFiles
+2021-02-24 16:06:54 [main] INFO  MailMessage:123 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test3\1.txt, d:\test\test\3.txt]
+2021-02-24 16:06:54 [main] INFO  MailMessage:127 - attaching file d:\test\2.txt to body email
+2021-02-24 16:06:54 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:191 - Setting filename: d:\test\2.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:127 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:06:54 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:191 - Setting filename: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:127 - attaching file d:\test\1.txt to body email
+2021-02-24 16:06:54 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:191 - Setting filename: d:\test\1.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:127 - attaching file d:\test3\1.txt to body email
+2021-02-24 16:06:54 [main] INFO  MailMessage:185 - Attaching file to body: d:\test3\1.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:191 - Setting filename: d:\test3\1.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:127 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:06:54 [main] INFO  MailMessage:185 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:191 - Setting filename: d:\test\test\3.txt
+2021-02-24 16:06:54 [main] INFO  MailMessage:61 - Setting content email. Add all body's to Email Message
+2021-02-24 16:06:54 [main] INFO  MailMessage:68 - SendingMessage
+2021-02-24 16:06:54 [main] ERROR MailMessage:71 - Cant send Email
+javax.mail.MessagingException: Unknown SMTP host: smtp.example.ru
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1959) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:654) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:317) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:176) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Service.connect(Service.java:125) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send0(Transport.java:253) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at javax.mail.Transport.send(Transport.java:124) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.mailsender.MailMessage.sendEmail(MailMessage.java:69) [classes/:?]
+	at com.mailsender.MailMessage.doAllTask(MailMessage.java:41) [classes/:?]
+	at com.mailsender.Main.main(Main.java:49) [classes/:?]
+Caused by: java.net.UnknownHostException: smtp.example.ru
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:567) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:299) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:234) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:1927) ~[mail-1.5.0-b01.jar:1.5.0-b01]
+	... 9 more
+2021-02-24 16:06:54 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:18:22 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:18:22 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:18:22 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:18:22 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:18:22 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:18:22 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:18:22 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:18:22 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:18:22 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 16:18:22 [main] INFO  MailSession:22 - Entering parameters: 
+ user = e.aysin@shelter.ru 
+ password = KernelLib20! 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.yandex.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:18:22 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:18:22 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:18:22 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 16:18:22 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:18:22 [main] INFO  MailMessage:40 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}; isEnabled true
+2021-02-24 16:18:22 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:18:22 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:18:23 [main] INFO  MailMessage:81 - Settings from Email :e.aysin@shelter.ru
+2021-02-24 16:18:23 [main] INFO  MailMessage:89 - Recipients of Email: {}e.aysin@shelter.ru
+2021-02-24 16:18:23 [main] INFO  MailMessage:93 - Add addRecipient: e.aysin@shelter.ru
+2021-02-24 16:18:23 [main] INFO  MailMessage:104 - Settings Subject of Mail
+2021-02-24 16:18:23 [main] INFO  MailMessage:116 - set text message body. text: SomeText
+2021-02-24 16:18:23 [main] INFO  MailMessage:124 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:18:23 [main] INFO  MailMessage:139 - FileList: [d:\test2, d:\test]
+2021-02-24 16:18:23 [main] INFO  MailMessage:143 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:18:23 [main] INFO  MailMessage:153 - File d:\test2 not found
+2021-02-24 16:18:23 [main] INFO  MailMessage:143 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:18:23 [main] INFO  MailMessage:149 - Get Collection of file
+2021-02-24 16:18:23 [main] INFO  MailMessage:161 - Get file list from dir: d:\test
+2021-02-24 16:18:23 [main] INFO  MailMessage:126 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test\test\3.txt]
+2021-02-24 16:18:23 [main] INFO  MailMessage:130 - attaching file d:\test\2.txt to body email
+2021-02-24 16:18:23 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:194 - Setting filename: d:\test\2.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:130 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:18:23 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:194 - Setting filename: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:130 - attaching file d:\test\1.txt to body email
+2021-02-24 16:18:23 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:194 - Setting filename: d:\test\1.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:130 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:18:23 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:194 - Setting filename: d:\test\test\3.txt
+2021-02-24 16:18:23 [main] INFO  MailMessage:64 - Setting content email. Add all body's to Email Message
+2021-02-24 16:18:23 [main] INFO  MailMessage:71 - SendingMessage
+2021-02-24 16:18:24 [main] INFO  MailMessage:40 - task : MailToTask{fromEmail='emailFrom@mymail.com', sendListToEmail=[sendToEmail1@targetmail.com, sendToEmail2@targetmail.com], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}; isEnabled false
+2021-02-24 16:18:24 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:22:08 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:22:08 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:22:08 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:22:08 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:22:08 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:22:08 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:22:08 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:22:08 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:22:09 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@6cc558c6
+2021-02-24 16:22:09 [main] INFO  MailSession:22 - Entering parameters: 
+ user = e.aysin@shelter.ru 
+ password = KernelLib20! 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.yandex.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:22:09 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:22:09 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:22:09 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 16:22:09 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:22:09 [main] INFO  MailMessage:38 - Count tasks
+2021-02-24 16:22:09 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}; isEnabled true
+2021-02-24 16:22:09 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:22:09 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:22:09 [main] INFO  MailMessage:82 - Settings from Email :e.aysin@shelter.ru
+2021-02-24 16:22:09 [main] INFO  MailMessage:90 - Recipients of Email: {}e.aysin@shelter.ru
+2021-02-24 16:22:09 [main] INFO  MailMessage:94 - Add addRecipient: e.aysin@shelter.ru
+2021-02-24 16:22:09 [main] INFO  MailMessage:105 - Settings Subject of Mail
+2021-02-24 16:22:09 [main] INFO  MailMessage:117 - set text message body. text: SomeText
+2021-02-24 16:22:09 [main] INFO  MailMessage:125 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:22:09 [main] INFO  MailMessage:140 - FileList: [d:\test2, d:\test]
+2021-02-24 16:22:09 [main] INFO  MailMessage:144 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:22:09 [main] INFO  MailMessage:154 - File d:\test2 not found
+2021-02-24 16:22:09 [main] INFO  MailMessage:144 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:22:09 [main] INFO  MailMessage:150 - Get Collection of file
+2021-02-24 16:22:09 [main] INFO  MailMessage:162 - Get file list from dir: d:\test
+2021-02-24 16:22:09 [main] INFO  MailMessage:127 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test\test\3.txt]
+2021-02-24 16:22:09 [main] INFO  MailMessage:131 - attaching file d:\test\2.txt to body email
+2021-02-24 16:22:09 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:22:09 [main] INFO  MailMessage:131 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:22:09 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:22:09 [main] INFO  MailMessage:131 - attaching file d:\test\1.txt to body email
+2021-02-24 16:22:09 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:22:09 [main] INFO  MailMessage:131 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:22:09 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:22:09 [main] INFO  MailMessage:65 - Setting content email. Add all body's to Email Message
+2021-02-24 16:22:09 [main] INFO  MailMessage:72 - SendingMessage
+2021-02-24 16:22:10 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:22:10 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:22:10 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:22:10 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:22:10 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:22:10 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:22:10 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:22:10 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:22:10 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 16:22:10 [main] INFO  MailSession:22 - Entering parameters: 
+ user = e.aysin@shelter.ru 
+ password = KernelLib20! 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.yandex.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:22:10 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:22:10 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:22:10 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}; isEnabled false
+2021-02-24 16:22:10 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:22:10 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 16:22:10 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:22:10 [main] INFO  MailMessage:38 - Count tasks
+2021-02-24 16:22:10 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}; isEnabled true
+2021-02-24 16:22:10 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:22:10 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:22:10 [main] INFO  MailMessage:82 - Settings from Email :e.aysin@shelter.ru
+2021-02-24 16:22:10 [main] INFO  MailMessage:90 - Recipients of Email: {}e.aysin@shelter.ru
+2021-02-24 16:22:10 [main] INFO  MailMessage:94 - Add addRecipient: e.aysin@shelter.ru
+2021-02-24 16:22:10 [main] INFO  MailMessage:105 - Settings Subject of Mail
+2021-02-24 16:22:10 [main] INFO  MailMessage:117 - set text message body. text: SomeText
+2021-02-24 16:22:10 [main] INFO  MailMessage:125 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:22:10 [main] INFO  MailMessage:140 - FileList: [d:\test2, d:\test]
+2021-02-24 16:22:10 [main] INFO  MailMessage:144 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:22:10 [main] INFO  MailMessage:154 - File d:\test2 not found
+2021-02-24 16:22:10 [main] INFO  MailMessage:144 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:22:10 [main] INFO  MailMessage:150 - Get Collection of file
+2021-02-24 16:22:10 [main] INFO  MailMessage:162 - Get file list from dir: d:\test
+2021-02-24 16:22:10 [main] INFO  MailMessage:127 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test\test\3.txt]
+2021-02-24 16:22:10 [main] INFO  MailMessage:131 - attaching file d:\test\2.txt to body email
+2021-02-24 16:22:10 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:22:10 [main] INFO  MailMessage:131 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:22:10 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:22:10 [main] INFO  MailMessage:131 - attaching file d:\test\1.txt to body email
+2021-02-24 16:22:10 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:22:10 [main] INFO  MailMessage:131 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:22:10 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:22:10 [main] INFO  MailMessage:65 - Setting content email. Add all body's to Email Message
+2021-02-24 16:22:10 [main] INFO  MailMessage:72 - SendingMessage
+2021-02-24 16:22:11 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}; isEnabled false
+2021-02-24 16:22:11 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:23:25 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:23:25 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:23:25 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:23:25 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:23:25 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:23:25 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:23:25 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:23:25 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:23:26 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 16:23:26 [main] INFO  MailSession:22 - Entering parameters: 
+ user = e.aysin@shelter.ru 
+ password = KernelLib20! 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.yandex.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:23:26 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:23:26 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:23:26 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}]
+2021-02-24 16:23:26 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:23:26 [main] INFO  MailMessage:38 - Count tasks
+2021-02-24 16:23:26 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}; isEnabled true
+2021-02-24 16:23:26 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:23:26 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:23:26 [main] INFO  MailMessage:82 - Settings from Email :e.aysin@shelter.ru
+2021-02-24 16:23:26 [main] INFO  MailMessage:90 - Recipients of Email: {}e.aysin@shelter.ru
+2021-02-24 16:23:26 [main] INFO  MailMessage:94 - Add addRecipient: e.aysin@shelter.ru
+2021-02-24 16:23:26 [main] INFO  MailMessage:105 - Settings Subject of Mail
+2021-02-24 16:23:26 [main] INFO  MailMessage:117 - set text message body. text: SomeText
+2021-02-24 16:23:26 [main] INFO  MailMessage:125 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:23:26 [main] INFO  MailMessage:140 - FileList: [d:\test2, d:\test]
+2021-02-24 16:23:26 [main] INFO  MailMessage:144 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:23:26 [main] INFO  MailMessage:154 - File d:\test2 not found
+2021-02-24 16:23:26 [main] INFO  MailMessage:144 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:23:26 [main] INFO  MailMessage:150 - Get Collection of file
+2021-02-24 16:23:26 [main] INFO  MailMessage:162 - Get file list from dir: d:\test
+2021-02-24 16:23:26 [main] INFO  MailMessage:127 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test\test\3.txt]
+2021-02-24 16:23:26 [main] INFO  MailMessage:131 - attaching file d:\test\2.txt to body email
+2021-02-24 16:23:26 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:195 - Setting filename: d:\test\2.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:131 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:23:26 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:195 - Setting filename: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:131 - attaching file d:\test\1.txt to body email
+2021-02-24 16:23:26 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:195 - Setting filename: d:\test\1.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:131 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:23:26 [main] INFO  MailMessage:189 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:195 - Setting filename: d:\test\test\3.txt
+2021-02-24 16:23:26 [main] INFO  MailMessage:65 - Setting content email. Add all body's to Email Message
+2021-02-24 16:23:26 [main] INFO  MailMessage:72 - SendingMessage
+2021-02-24 16:23:27 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=false}; isEnabled false
+2021-02-24 16:23:27 [main] INFO  Main:50 - Done. MailSender finished...................
+2021-02-24 16:27:26 [main] INFO  Main:18 - Start MailSender................................................
+2021-02-24 16:27:26 [main] INFO  Main:22 - chek args: {}
+2021-02-24 16:27:26 [main] INFO  Main:55 - Checking syntax of argument
+2021-02-24 16:27:26 [main] INFO  Main:43 - Initialize configuration
+2021-02-24 16:27:26 [main] INFO  ConfigInit:36 - Prepare to read config file: connection_settings.json, sender_settings.json
+2021-02-24 16:27:26 [main] INFO  Main:46 - Initialize MailSender
+2021-02-24 16:27:26 [main] INFO  ConfigInit:60 - Getting Session's parameters
+2021-02-24 16:27:26 [main] INFO  ConfigInit:61 - Start read configuration file: connection_settings.json
+2021-02-24 16:27:27 [main] INFO  ConfigInit:67 - Read file connection_settings.json successful. Configuration is com.mailsender.settings.ConnectionSettings@19c65cdc
+2021-02-24 16:27:27 [main] INFO  MailSession:22 - Entering parameters: 
+ user = e.aysin@shelter.ru 
+ password = KernelLib20! 
+ properties = { {mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory, mail.smtp.port=465, mail.smtp.auth=true, mail.smtp.host=smtp.yandex.ru, mail.smtp.socketFactory.port=465} }
+2021-02-24 16:27:27 [main] INFO  ConfigInit:83 - Getting task's parameters
+2021-02-24 16:27:27 [main] INFO  ConfigInit:84 - Start read configuration file: sender_settings.json
+2021-02-24 16:27:27 [main] INFO  ConfigInit:89 - Read file sender_settings.json successful. Configuration is [MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}, MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=true}]
+2021-02-24 16:27:27 [main] INFO  Main:48 - Starting tasks.............................
+2021-02-24 16:27:27 [main] INFO  MailMessage:38 - Count tasks: 2
+2021-02-24 16:27:27 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 16:27:27 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:27:27 [main] INFO  MailSession:38 - Creating session and return
+2021-02-24 16:27:27 [main] INFO  MailMessage:81 - Settings from Email :e.aysin@shelter.ru
+2021-02-24 16:27:27 [main] INFO  MailMessage:89 - Recipients of Email: {}e.aysin@shelter.ru
+2021-02-24 16:27:27 [main] INFO  MailMessage:93 - Add addRecipient: e.aysin@shelter.ru
+2021-02-24 16:27:27 [main] INFO  MailMessage:104 - Settings Subject of Mail
+2021-02-24 16:27:27 [main] INFO  MailMessage:116 - set text message body. text: SomeText
+2021-02-24 16:27:27 [main] INFO  MailMessage:124 - Prepare to attach files [d:\test2, d:\test]
+2021-02-24 16:27:27 [main] INFO  MailMessage:139 - FileList: [d:\test2, d:\test]
+2021-02-24 16:27:27 [main] INFO  MailMessage:143 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:27:27 [main] INFO  MailMessage:153 - File d:\test2 not found
+2021-02-24 16:27:27 [main] INFO  MailMessage:143 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:27:27 [main] INFO  MailMessage:149 - Get Collection of file
+2021-02-24 16:27:27 [main] INFO  MailMessage:161 - Get file list from dir: d:\test
+2021-02-24 16:27:27 [main] INFO  MailMessage:126 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test\test\3.txt]
+2021-02-24 16:27:27 [main] INFO  MailMessage:130 - attaching file d:\test\2.txt to body email
+2021-02-24 16:27:27 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:194 - Setting filename: d:\test\2.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:130 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:27:27 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:194 - Setting filename: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:130 - attaching file d:\test\1.txt to body email
+2021-02-24 16:27:27 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:194 - Setting filename: d:\test\1.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:130 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:27:27 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:194 - Setting filename: d:\test\test\3.txt
+2021-02-24 16:27:27 [main] INFO  MailMessage:64 - Setting content email. Add all body's to Email Message
+2021-02-24 16:27:27 [main] INFO  MailMessage:71 - SendingMessage
+2021-02-24 16:27:28 [main] INFO  MailMessage:41 - task : MailToTask{fromEmail='e.aysin@shelter.ru', sendListToEmail=[e.aysin@shelter.ru, abonement.support@shelter.ru], attachedFilesInDirectory=[d:\test2, d:\test, d:\test3\1.txt], subject='Subject Of Email', text='SomeText', taskEnabled=true}
+2021-02-24 16:27:28 [main] INFO  MailSession:29 - Getting session
+2021-02-24 16:27:28 [main] INFO  MailSession:41 - return created session
+2021-02-24 16:27:28 [main] INFO  MailMessage:81 - Settings from Email :e.aysin@shelter.ru
+2021-02-24 16:27:28 [main] INFO  MailMessage:89 - Recipients of Email: {}e.aysin@shelter.ru
+2021-02-24 16:27:28 [main] INFO  MailMessage:93 - Add addRecipient: e.aysin@shelter.ru
+2021-02-24 16:27:28 [main] INFO  MailMessage:93 - Add addRecipient: abonement.support@shelter.ru
+2021-02-24 16:27:28 [main] INFO  MailMessage:104 - Settings Subject of Mail
+2021-02-24 16:27:28 [main] INFO  MailMessage:116 - set text message body. text: SomeText
+2021-02-24 16:27:28 [main] INFO  MailMessage:124 - Prepare to attach files [d:\test2, d:\test, d:\test3\1.txt]
+2021-02-24 16:27:28 [main] INFO  MailMessage:139 - FileList: [d:\test2, d:\test, d:\test3\1.txt]
+2021-02-24 16:27:28 [main] INFO  MailMessage:143 - File d:\test2: isExist false,  is dir - false
+2021-02-24 16:27:28 [main] INFO  MailMessage:153 - File d:\test2 not found
+2021-02-24 16:27:28 [main] INFO  MailMessage:143 - File d:\test: isExist true,  is dir - true
+2021-02-24 16:27:28 [main] INFO  MailMessage:149 - Get Collection of file
+2021-02-24 16:27:28 [main] INFO  MailMessage:161 - Get file list from dir: d:\test
+2021-02-24 16:27:28 [main] INFO  MailMessage:143 - File d:\test3\1.txt: isExist true,  is dir - false
+2021-02-24 16:27:28 [main] INFO  MailMessage:146 - Add file: {} to listFiles
+2021-02-24 16:27:28 [main] INFO  MailMessage:126 - attacheListFile: [d:\test\2.txt, d:\test\test\FolderInTest\4.txt, d:\test\1.txt, d:\test3\1.txt, d:\test\test\3.txt]
+2021-02-24 16:27:28 [main] INFO  MailMessage:130 - attaching file d:\test\2.txt to body email
+2021-02-24 16:27:28 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\2.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:194 - Setting filename: d:\test\2.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:130 - attaching file d:\test\test\FolderInTest\4.txt to body email
+2021-02-24 16:27:28 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:194 - Setting filename: d:\test\test\FolderInTest\4.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:130 - attaching file d:\test\1.txt to body email
+2021-02-24 16:27:28 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\1.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:194 - Setting filename: d:\test\1.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:130 - attaching file d:\test3\1.txt to body email
+2021-02-24 16:27:28 [main] INFO  MailMessage:188 - Attaching file to body: d:\test3\1.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:194 - Setting filename: d:\test3\1.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:130 - attaching file d:\test\test\3.txt to body email
+2021-02-24 16:27:28 [main] INFO  MailMessage:188 - Attaching file to body: d:\test\test\3.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:194 - Setting filename: d:\test\test\3.txt
+2021-02-24 16:27:28 [main] INFO  MailMessage:64 - Setting content email. Add all body's to Email Message
+2021-02-24 16:27:28 [main] INFO  MailMessage:71 - SendingMessage
+2021-02-24 16:27:29 [main] INFO  Main:50 - Done. MailSender finished...................

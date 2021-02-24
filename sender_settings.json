@@ -1,1 +1,15 @@
-[{"fromEmail":"emailFrom@mymail.com","sendListToEmail":["sendToEmail1@targetmail.com","sendToEmail2@targetmail.com"],"attachedFilesInDirectory":["test","d:\test"],"subject":"Subject Of Email","text":"SomeText","taskEnabled":true},{"fromEmail":"emailFrom@mymail.com","sendListToEmail":["sendToEmail1@targetmail.com","sendToEmail2@targetmail.com"],"attachedFilesInDirectory":["test","d:\test"],"subject":"Subject Of Email","text":"SomeText","taskEnabled":false}]
+[{
+  "fromEmail":"e.aysin@shelter.ru",
+  "sendListToEmail":["e.aysin@shelter.ru"],
+  "attachedFilesInDirectory":["d:\\test2","d:\\test"],
+  "subject":"Subject Of Email",
+  "text":"SomeText",
+  "taskEnabled":true},
+  {
+    "fromEmail":"e.aysin@shelter.ru",
+    "sendListToEmail":["e.aysin@shelter.ru","abonement.support@shelter.ru"],
+    "attachedFilesInDirectory": ["d:\\test2","d:\\test", "d:\\test3\\1.txt"],
+    "subject":"Subject Of Email",
+    "text":"SomeText",
+    "taskEnabled":true
+  }]

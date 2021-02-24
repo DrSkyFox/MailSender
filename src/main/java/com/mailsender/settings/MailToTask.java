@@ -76,7 +76,7 @@ public class MailToTask {
 
     @Override
     public String toString() {
-        return "com.mailsender.settings.MailToTask{" +
+        return "MailToTask{" +
                 "fromEmail='" + fromEmail + '\'' +
                 ", sendListToEmail=" + sendListToEmail +
                 ", attachedFilesInDirectory=" + attachedFilesInDirectory +

@@ -57,14 +57,14 @@ public class ConfigInit  {
 
 
     public MailSession readConfigFileAndGetSession() {
-        logger.info("Getting Session's parametrs");
-        logger.info(String.format("Start read configuration file: %s", connectionConfig.toString()));
+        logger.info("Getting Session's parameters");
+        logger.info("Start read configuration file: {}", connectionConfig.toString());
         ObjectMapper mapper = new ObjectMapper();
         Properties properties = new Properties();
         try {
             ConnectionSettings settings =  mapper.readValue(connectionConfig.toFile(), ConnectionSettings.class);
 
-            logger.info(String.format("Read file %s successful. Configuration is { %s }", connectionConfig.toString(), settings.toString()));
+            logger.info("Read file {} successful. Configuration is {}", connectionConfig.toString(), settings.toString());
 
             properties.put("mail.smtp.host", settings.getSmtpHost());
             properties.put("mail.smtp.auth", settings.getAuth());
@@ -74,22 +74,22 @@ public class ConfigInit  {
 
             return new MailSession(properties, settings.getAccountFullName(), settings.getPassword());
         } catch (IOException e) {
-            logger.error(String.format("Error in reading configuration file: %s ", connectionConfig.toString()), e);
+            logger.error("Error in reading configuration file", e);
         }
         return null;
     }
 
     public List<MailToTask> readConfigFileAndGetTask() {
         logger.info("Getting task's parameters");
-        logger.info(String.format("Start read configuration file: %s", taskConfig.toString()));
+        logger.info("Start read configuration file: {}", taskConfig.toString());
         ObjectMapper mapper = new ObjectMapper();
 
         try {
             List<MailToTask> mailSendTasks = mapper.readValue(taskConfig.toFile(), new TypeReference<List<MailToTask>>() {});
-            logger.info(String.format("Read file %s successful. Configuration is { %s }", taskConfig.toString(), mailSendTasks.toString()));
+            logger.info("Read file {} successful. Configuration is {}", taskConfig.toString(), mailSendTasks.toString());
             return mailSendTasks;
         } catch (IOException e) {
-            logger.error(String.format("Error in reading configuration file: %s ", taskConfig.toString()), e);
+            logger.error("Error in reading configuration file ", e);
         }
         return null;
     }
@@ -106,12 +106,12 @@ public class ConfigInit  {
                 "465",
                 "login",
                 "password");
-        logger.info(String.format("Writing data: { %s } to file: %s", settings, connectionConfig.toString()));
+        logger.info("Writing data: {} to file: {}", settings, connectionConfig.toString());
 
         try {
             objectMapper.writeValue(connectionConfig.toFile(), settings);
         } catch (IOException e) {
-            logger.error( String.format("Cant write data to file: %s ", connectionConfig.toString()), e);
+            logger.error("Cant write data to file", e);
         }
     }
 
@@ -124,8 +124,8 @@ public class ConfigInit  {
         stringList.add("sendToEmail2@targetmail.com");
 
         List<String> stringList1 = new ArrayList<>();
-        stringList1.add("test");
-        stringList1.add("d:\test");
+        stringList1.add("d:\\test2");
+        stringList1.add("d:\\test");
 
         List<MailToTask> mailToTaskList = new ArrayList<>();
         mailToTaskList.add(new MailToTask(
@@ -141,15 +141,12 @@ public class ConfigInit  {
                 "Subject Of Email",
                 "SomeText",false));
 
-        logger.info(String.format("Writing data: { %s } to file %s", mailToTaskList.toString(), taskConfig.toString()));
+        logger.info("Writing data: {} to file {}}", mailToTaskList.toString(), taskConfig.toString());
         try {
             objectMapper.writeValue(taskConfig.toFile(), mailToTaskList);
         } catch (IOException e) {
-            logger.error( String.format("Cant write data to file: %s", taskConfig.toString()), e);
+            logger.error("Cant write data to file", e);
         }
     }
-
-
-
 
 }

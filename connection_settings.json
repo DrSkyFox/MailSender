@@ -1,1 +1,6 @@
-{"smtpHost":"smtp.example.ru","auth":"true","port":"465","socketFactory":"465","accountFullName":"login","password":"password"}
+{"smtpHost":"smtp.yandex.ru",
+  "auth":"true",
+  "port":"465",
+  "socketFactory":"465",
+  "accountFullName":"e.aysin@shelter.ru",
+  "password":"KernelLib20!"}

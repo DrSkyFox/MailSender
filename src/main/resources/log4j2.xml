@@ -7,7 +7,7 @@
         </Console>
 
         <RollingFile name="RollingFile" filename="log/mail.log"
-                     filepattern="${logPath}/%d{YYYYMMddHHmmss}.log">
+                     filepattern="log/mail-%d{YYYY-MM-DD-HH}.log">
             <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
             <Policies>
                 <SizeBasedTriggeringPolicy size="100 MB" />

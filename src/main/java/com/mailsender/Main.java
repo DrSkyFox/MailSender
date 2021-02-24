@@ -15,11 +15,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
+        logger.info("Start MailSender................................................");
         Path connectionConfig = Path.of("SettingOfConnection.json");
         Path taskConfig = Path.of("TaskSettings.json");
 
+        logger.info("chek args: {}", args);
         if(checkSyntaxArguments(args) && args.length > 0) {
             help();
             return;
@@ -40,17 +40,19 @@ public class Main {
             }
         }
 
-
-
+        logger.info("Initialize configuration");
         ConfigInit configInit = new ConfigInit(connectionConfig,taskConfig);
 
+        logger.info("Initialize MailSender");
         MailMessage message = new MailMessage(configInit);
+        logger.info("Starting tasks.............................");
         message.doAllTask();
+        logger.info("Done. MailSender finished...................");
     }
 
 
-
     private static boolean checkSyntaxArguments(String [] args) {
+        logger.info("Checking syntax of argument");
         if(args.length%2 != 0) {
             return false;
         }
