@@ -15,8 +15,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
         Path connectionConfig = Path.of("SettingOfConnection.json");
         Path taskConfig = Path.of("TaskSettings.json");
 

@@ -1,0 +1,6 @@
+POST https://amoposad.salesup.pro/api/subscription.webhook
+Content-Type: application/json
+{
+"id": "123",
+"test": "just http request"
+}

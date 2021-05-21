@@ -1,27 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
-
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-
-        <RollingFile name="RollingFile" filename="log/mail.log"
-                     filepattern="${logPath}/%d{YYYYMMddHHmmss}.log">
-            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
-            <Policies>
-                <SizeBasedTriggeringPolicy size="100 MB" />
-            </Policies>
-            <DefaultRolloverStrategy max="20" />
-        </RollingFile>
-
     </Appenders>
-
-
     <Loggers>
-        <Root level="info">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="RollingFile" />
+        <Logger name="com" level="trace">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 </Configuration>
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration status="ON">-->
+<!--    <Properties>-->
+<!--        <Property name="log-path">./logs/</Property>-->
+<!--        <Property name="log-project-name">MailSender</Property>-->
+<!--        <Property name="log-pattern">%d{ISO8601} %-5p [Sample][%t|%c{1}] %L %M %m\n</Property>-->
+<!--        <Property name="rollover-strategy-max">7</Property>-->
+<!--        <Property name="rolling-size-based">10 MB</Property>-->
+<!--    </Properties>-->
+<!--    <appenders>-->
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            <PatternLayout>-->
+<!--                <pattern>${log-pattern}</pattern>-->
+<!--            </PatternLayout>-->
+<!--        </Console>-->
+<!--        <RollingFile name="DEBUG" fileName="${log-path}/${log-project-name}-debug.log" filePattern="${log-path}/${log-project-name}-debug-%d-%i.log.zip">-->
+<!--            <PatternLayout>-->
+<!--                <pattern>${log-pattern}</pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="${rolling-size-based}" />-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="${rollover-strategy-max}" />-->
+<!--        </RollingFile>-->
+<!--        <RollingFile name="ERROR" fileName="${log-path}/${log-project-name}-error.log" filePattern="${log-path}/${log-project-name}-error-%d-%i.log.zip">-->
+<!--            <PatternLayout>-->
+<!--                <pattern>${log-pattern}</pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="${rolling-size-based}" />-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="${rollover-strategy-max}" />-->
+<!--        </RollingFile>-->
+<!--        <RollingFile name="INFO" fileName="${log-path}/${log-project-name}-info.log" filePattern="${log-path}/${log-project-name}-info-%d-%i.log.zip">-->
+<!--            <PatternLayout>-->
+<!--                <pattern>${log-pattern}</pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="${rolling-size-based}" />-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="${rollover-strategy-max}" />-->
+<!--            <Filters>-->
+<!--                &lt;!&ndash; Now deny warn, error and fatal messages &ndash;&gt;-->
+<!--                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />-->
+<!--                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />-->
+<!--                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL" />-->
+
+<!--                &lt;!&ndash; This filter accepts info, warn, error, fatal and denies debug/trace &ndash;&gt;-->
+<!--                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />-->
+<!--            </Filters>-->
+<!--        </RollingFile>-->
+<!--    </appenders>-->
+<!--    <Loggers>-->
+<!--        <logger name="com.mailsender.MailMessage" level="trace" additivity="false">-->
+<!--            <AppenderRef ref="Console" level="info" />-->
+<!--            <AppenderRef ref="ERROR" level="error" />-->
+<!--            <AppenderRef ref="DEBUG" level="debug" />-->
+<!--            <AppenderRef ref="INFO" level="info" />-->
+<!--        </logger>-->
+<!--    </Loggers>-->
+<!--</configuration>-->

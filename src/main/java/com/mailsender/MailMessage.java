@@ -76,27 +76,14 @@ public class MailMessage {
             BodyPart part = getMessagePart(text);
             multipart.addBodyPart(part);
 
-            logger.info("Attaching files to Mail");
-            for (String file : files
-            ) {
-                if(Files.exists(Path.of(file)) && !Files.isDirectory(Path.of(file))) {
-                    logger.info(String.format("%s is file. Attach to message"));
-                    multipart.addBodyPart(getAttachFilePart(file));
-                } else if(Files.exists(Path.of(file)) && Files.isDirectory(Path.of(file))) {
-                    logger.info(String.format("%s is directory", file));
-                    Set<String> listFilesInDir = listFilesUsingFileWalk(file);
-                    for (String strFile: listFilesInDir
-                         ) {
-                        logger.info(String.format("Attach file %s from dir %s", strFile, file));
-                        multipart.addBodyPart(getAttachFilePart(strFile));
-                    }
-                }
-            }
+            attachFiles(files, multipart);
 
             message.setContent(multipart);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            logger.error( "SomeThing gonna wrong", e);
+            logger.error( "cant attach files", e.getMessage());
+        } catch (MessagingException e) {
+            logger.error("Some thing gonna wrong", e.getMessage());
         }
 
         try {
@@ -104,6 +91,28 @@ public class MailMessage {
             Transport.send(message);
         } catch (MessagingException e) {
             logger.error( "Cant send Email", e);
+        }
+
+    }
+
+    private void attachFiles(List<String> files, Multipart multipart) throws MessagingException, IOException {
+        logger.info("Attaching files to Mail");
+        for (String file : files
+        ) {
+            logger.info(String.format("check file is dir: %s ", file));
+
+            if(file != "" && Files.exists(Path.of(file)) && !Files.isDirectory(Path.of(file))) {
+                logger.info(String.format("%s is file. Attach to message"));
+                multipart.addBodyPart(getAttachFilePart(file));
+            } else if(file !="" && Files.exists(Path.of(file)) && Files.isDirectory(Path.of(file))) {
+                logger.info(String.format("%s is directory", file));
+                Set<String> listFilesInDir = listFilesUsingFileWalk(file);
+                for (String strFile: listFilesInDir
+                     ) {
+                    logger.info(String.format("Attach file %s from dir %s", strFile, file));
+                    multipart.addBodyPart(getAttachFilePart(strFile));
+                }
+            }
         }
     }
 

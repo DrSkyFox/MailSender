@@ -124,8 +124,8 @@ public class ConfigInit  {
         stringList.add("sendToEmail2@targetmail.com");
 
         List<String> stringList1 = new ArrayList<>();
-        stringList1.add("test");
-        stringList1.add("d:\test");
+        stringList1.add("d:/VM");
+        stringList1.add("d:/TEST");
 
         List<MailToTask> mailToTaskList = new ArrayList<>();
         mailToTaskList.add(new MailToTask(
